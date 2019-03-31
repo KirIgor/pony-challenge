@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Map as iMap } from 'immutable';
 
 import { Point, Side, Role } from './types';
-import { range } from './helper';
+import { range } from './utils/helper';
 
 import MazeCeil from './maze_ceil';
 
