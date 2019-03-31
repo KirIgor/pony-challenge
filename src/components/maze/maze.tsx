@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Map as iMap } from 'immutable';
 
-import { Point, Side, Role } from './types';
-import { range } from './utils/helper';
+import { Point, Side, Role } from '../../types';
+import { range } from '../../utils/helper';
 
 import MazeCeil from './maze_ceil';
 
@@ -16,7 +16,7 @@ interface Blueprint {
 	};
 }
 
-interface Props {
+export interface MazeProps {
 	width: number;
 	height: number;
 	charactersPosition: CharactersPosition;
@@ -42,7 +42,7 @@ function Row({ children }: { children: JSX.Element[] }) {
 	return <div>{children}</div>;
 }
 
-export default function Maze({ width, height, charactersPosition, blueprint }: Props) {
+export default function Maze({ width, height, charactersPosition, blueprint }: MazeProps) {
 	return <div>{renderCeils(width, height, charactersPosition, blueprint)}</div>;
 }
 
