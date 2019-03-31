@@ -1,3 +1,10 @@
+.ceil {
+	width: 19px;
+	height: 19px;
+
+	border: 1px solid transparent;
+}
+
 .left {
 	border-left: 1px solid black;
 }

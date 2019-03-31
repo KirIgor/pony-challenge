@@ -1,16 +1,30 @@
 import * as React from 'react';
 import './App.css';
 
-// import MazeCeil from './maze_ceil';
-
-// import { logger } from './utils/logger';
+import Maze from './components/maze/maze';
 import MockPonyApi from './api/mock_pony_api';
+import { parseGameState } from './api/parser';
 
-class App extends React.Component {
+class App extends React.Component<any, any> {
+	constructor(props: any) {
+		super(props);
+
+		this.state = {
+			gameState: {}
+		};
+	}
+
+	public componentDidMount() {
+		MockPonyApi.getState('').then(r => {
+			this.setState({ gameState: r });
+		});
+	}
+
 	public render() {
-		return <div />;
+		const { gameState } = this.state;
+
+		return <Maze {...gameState.size && parseGameState(gameState)} />;
 	}
 }
 
-MockPonyApi.getState('');
 export default App;

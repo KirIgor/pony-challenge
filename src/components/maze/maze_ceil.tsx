@@ -3,8 +3,11 @@ import classNames from 'classnames';
 
 import { Role, Side } from '../../types';
 
+import './maze_ceil.css';
+
+// sides is bitwise OR of sides
 interface Props {
-	sides: Side[];
+	sides: number;
 	role: Role;
 }
 
@@ -29,10 +32,11 @@ export default function MazeCeil({ sides, role = Role.NONE }: Props) {
 	return (
 		<div
 			className={classNames({
-				left: sides.includes(Side.LEFT),
-				right: sides.includes(Side.RIGHT),
-				top: sides.includes(Side.TOP),
-				bottom: sides.includes(Side.BOTTOM)
+				ceil: true,
+				left: sides & Side.LEFT,
+				right: sides & Side.RIGHT,
+				top: sides & Side.TOP,
+				bottom: sides & Side.BOTTOM
 			})}>
 			{renderRoleImage(role)}
 		</div>

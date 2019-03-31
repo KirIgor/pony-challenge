@@ -7,7 +7,7 @@ export interface Logger {
 
 export let logger: Logger;
 
-if (process.env.NODE_ENV == 'development') {
+if (process.env.NODE_ENV == 'development' || process.env.NODE_ENV == 'test') {
 	logger = {
 		debug: msg => console.log(msg),
 		info: msg => console.info(msg),

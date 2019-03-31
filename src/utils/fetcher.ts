@@ -35,6 +35,7 @@ const request = (url: string, method: Method, body: string = '') => {
 			.then(r => {
 				logger.debug(`Response of ${method.toString()} ${url}: `);
 				logger.debug(r);
+				resolve(r);
 			})
 			.catch(error => reject(error));
 	});
