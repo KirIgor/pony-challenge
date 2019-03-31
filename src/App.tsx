@@ -12,5 +12,4 @@ class App extends React.Component {
 	}
 }
 
-logger.debug('test1');
 export default App;
