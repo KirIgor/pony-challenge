@@ -1,10 +1,10 @@
 import * as React from 'react';
 import './App.css';
 
-// import logo from './logo.svg';
 // import MazeCeil from './maze_ceil';
 
-import { logger } from './utils/logger';
+// import { logger } from './utils/logger';
+import MockPonyApi from './api/mock_pony_api';
 
 class App extends React.Component {
 	public render() {
@@ -12,4 +12,5 @@ class App extends React.Component {
 	}
 }
 
+MockPonyApi.getState('');
 export default App;

@@ -1,5 +1,14 @@
-export enum PonyName {}
-enum Direction {
+export enum PonyName {
+	TWILIGHT_SPARKLE = 'Twilight Sparkle',
+	APPLEJACK = 'Applejack',
+	FLUTTERSHY = 'Fluttershy',
+	RARITY = 'Rarity',
+	PINKIE_PIE = 'Pinkie Pie',
+	RAINBOW_DASH = 'Rainbow Dash',
+	SPIKE = 'Spike'
+}
+
+export enum Direction {
 	WEST = 'west',
 	EAST = 'east',
 	NORTH = 'north',
@@ -9,7 +18,7 @@ enum Direction {
 type Id = string;
 type Position = [number];
 
-interface GameState {
+export interface GameState {
 	pony: Position;
 	domokun: Position;
 	'end-point': Position;
