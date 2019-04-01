@@ -31,7 +31,7 @@ const directionToSide = (direction: Direction): Side => {
 	}
 };
 
-export const parseBlueprint = (data: string[][], [width, height]: [number, number]): Blueprint =>
+export const parseBlueprint = ({ data, size: [width, height] }: APIState): Blueprint =>
 	fromJS(
 		range(height).map(i =>
 			data.slice(i * width, i * width + width).map((directions, j) => ({
@@ -51,12 +51,12 @@ const parsePosition = (pos: Position, width: number): Point =>
 		y: Math.floor(pos[0] / width)
 	});
 
-export const parseCharactersPosition = (
-	[width, height]: [number, number],
-	pony: Position,
-	domokun: Position,
-	exit: Position
-): CharactersPosition =>
+export const parseCharactersPosition = ({
+	size: [width, _],
+	pony,
+	domokun,
+	['end-point']: exit
+}: APIState): CharactersPosition =>
 	iMap<Role, Point>().withMutations(map =>
 		map
 			.set(Role.PONY, parsePosition(pony, width))
@@ -66,13 +66,9 @@ export const parseCharactersPosition = (
 
 export const parseGameState = (state: APIState): GameState =>
 	new GameState({
+		mazeId: state.maze_id,
 		width: state.size[0],
 		height: state.size[1],
-		charactersPosition: parseCharactersPosition(
-			state.size,
-			state.pony,
-			state.domokun,
-			state['end-point']
-		),
-		blueprint: parseBlueprint(state.data, state.size)
+		charactersPosition: parseCharactersPosition(state),
+		blueprint: parseBlueprint(state)
 	});

@@ -72,6 +72,7 @@ class BlueprintRecord extends blueprintRecord
 export type Blueprint = iList<iList<BlueprintRecord>>;
 
 interface IGameState {
+	mazeId: string;
 	width: number;
 	height: number;
 	charactersPosition: CharactersPosition;
@@ -79,6 +80,7 @@ interface IGameState {
 }
 
 const gameState = RecordFactory<IGameState>({
+	mazeId: '',
 	width: 0,
 	height: 0,
 	charactersPosition: iMap<Role, Point>(),
@@ -86,6 +88,7 @@ const gameState = RecordFactory<IGameState>({
 });
 
 export class GameState extends gameState implements IGameState, StaticallyTypedRecord<IGameState> {
+	mazeId: string;
 	width: number;
 	height: number;
 	charactersPosition: CharactersPosition;

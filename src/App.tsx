@@ -2,8 +2,11 @@ import * as React from 'react';
 import './App.css';
 
 import Game from './components/game/game';
-import MockPonyApi from './api/mock_pony_api';
+import { PonyAPI } from './api/pony_api';
+import ChallengePonyAPI from './api/challenge_pony_api';
 import { parseGameState } from './utils/parser';
+
+export const ponyAPI: PonyAPI = ChallengePonyAPI;
 
 class App extends React.Component<any, any> {
 	constructor(props: any) {
@@ -15,7 +18,7 @@ class App extends React.Component<any, any> {
 	}
 
 	public componentDidMount() {
-		MockPonyApi.getState('').then(r => {
+		ponyAPI.getState('').then(r => {
 			this.setState({ gameState: r });
 		});
 	}
