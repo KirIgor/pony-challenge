@@ -1,7 +1,7 @@
-import { GameState } from '../types';
+import { APIState } from '../types';
 import { parseGameState } from './parser';
 
-const stateMock: GameState = {
+const stateMock: APIState = {
 	pony: [3],
 	domokun: [7],
 	'end-point': [8],

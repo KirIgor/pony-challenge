@@ -1,4 +1,5 @@
-import { Map as iMap } from 'immutable';
+import { RecordFactory, StaticallyTypedRecord } from './utils/immutable_helper';
+import { Map as iMap, List as iList } from 'immutable';
 
 export enum Role {
 	PONY = 'pony',
@@ -14,9 +15,22 @@ export enum Side {
 	BOTTOM = 8
 }
 
-export interface Point {
+interface IPoint {
 	x: number;
 	y: number;
+}
+
+const point = RecordFactory<IPoint>({
+	x: 0,
+	y: 0
+});
+
+export class Point extends point implements IPoint, StaticallyTypedRecord<IPoint> {
+	x: number;
+	y: number;
+	constructor(props: IPoint) {
+		super(props);
+	}
 }
 
 export enum PonyName {
@@ -39,23 +53,50 @@ export enum Direction {
 export type CharactersPosition = iMap<Role, Point>;
 
 // sides is bitwise OR of sides
-export interface Blueprint {
-	[index: number]: {
-		[index: number]: {
-			sides: number;
-		};
-	};
+interface IBlueprintRecord {
+	sides: number;
 }
 
-export interface MazeProps {
+const blueprintRecord = RecordFactory<IBlueprintRecord>({
+	sides: 0
+});
+
+class BlueprintRecord extends blueprintRecord
+	implements IBlueprintRecord, StaticallyTypedRecord<IBlueprintRecord> {
+	sides: number;
+	constructor(props: IBlueprintRecord) {
+		super(props);
+	}
+}
+
+export type Blueprint = iList<iList<BlueprintRecord>>;
+
+interface IGameState {
 	width: number;
 	height: number;
 	charactersPosition: CharactersPosition;
 	blueprint: Blueprint;
 }
 
+const gameState = RecordFactory<IGameState>({
+	width: 0,
+	height: 0,
+	charactersPosition: iMap<Role, Point>(),
+	blueprint: iList<iList<BlueprintRecord>>()
+});
+
+export class GameState extends gameState implements IGameState, StaticallyTypedRecord<IGameState> {
+	width: number;
+	height: number;
+	charactersPosition: CharactersPosition;
+	blueprint: Blueprint;
+	constructor(props: IGameState) {
+		super(props);
+	}
+}
+
 export type Position = [number];
-export interface GameState {
+export interface APIState {
 	pony: Position;
 	domokun: Position;
 	'end-point': Position;

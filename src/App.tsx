@@ -1,9 +1,9 @@
 import * as React from 'react';
 import './App.css';
 
-import Maze from './components/maze/maze';
+import Game from './components/game/game';
 import MockPonyApi from './api/mock_pony_api';
-import { parseGameState } from './api/parser';
+import { parseGameState } from './utils/parser';
 
 class App extends React.Component<any, any> {
 	constructor(props: any) {
@@ -23,7 +23,7 @@ class App extends React.Component<any, any> {
 	public render() {
 		const { gameState } = this.state;
 
-		return <Maze {...gameState.size && parseGameState(gameState)} />;
+		return gameState.size ? <Game gameState={parseGameState(gameState)} /> : null;
 	}
 }
 
