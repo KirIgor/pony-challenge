@@ -1,4 +1,4 @@
-import { Direction, APIState, PonyName } from '../types';
+import { Direction, APIState, PonyName } from '../types/index';
 
 export interface NewGameResponse {
 	maze_id: string;

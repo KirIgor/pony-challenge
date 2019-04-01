@@ -1,32 +1,27 @@
 import * as React from 'react';
-import './App.css';
+import { Provider } from 'react-redux';
 
 import Game from './components/game/game';
+import { newStore } from './store/store';
 import { PonyAPI } from './api/pony_api';
 import ChallengePonyAPI from './api/challenge_pony_api';
 import { parseGameState } from './utils/parser';
 
+import './App.css';
+
 export const ponyAPI: PonyAPI = ChallengePonyAPI;
 
+const store = newStore();
+
 class App extends React.Component<any, any> {
-	constructor(props: any) {
-		super(props);
-
-		this.state = {
-			gameState: {}
-		};
-	}
-
-	public componentDidMount() {
-		ponyAPI.getState('').then(r => {
-			this.setState({ gameState: r });
-		});
-	}
+	public componentDidMount() {}
 
 	public render() {
-		const { gameState } = this.state;
-
-		return gameState.size ? <Game gameState={parseGameState(gameState)} /> : null;
+		return (
+			<Provider store={store}>
+				<Game />
+			</Provider>
+		);
 	}
 }
 

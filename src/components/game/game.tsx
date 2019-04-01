@@ -1,13 +1,9 @@
 import * as React from 'react';
-import { GameState } from '../../types';
+import { connect } from 'react-redux';
 
 import Maze from '../maze/maze';
 
-interface Props {
-	gameState: GameState;
-}
-
-export default function Game({ gameState }: Props) {
+export default function Game() {
 	return (
 		<div>
 			<Maze gameState={gameState} />

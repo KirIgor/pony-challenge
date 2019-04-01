@@ -1,6 +1,5 @@
-import { PonyName, Direction } from '../types';
+import { PonyName, Direction, APIState } from '../types/index';
 import { PonyAPI, NewGameResponse } from './pony_api';
-import { APIState } from '../types';
 import { get, post } from '../utils/fetcher';
 
 const baseURL = 'https://ponychallenge.trustpilot.com/pony-challenge';

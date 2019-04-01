@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 
-import { Role, Side } from '../../types';
+import { Role, Side } from '../../types/index';
 
 import './maze_ceil.css';
 

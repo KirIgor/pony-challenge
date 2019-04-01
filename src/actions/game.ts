@@ -1,8 +1,8 @@
-import { Direction } from '../types';
+import { Dispatch } from 'redux';
+
+import { Direction, GameState, CharactersPosition, PonyName } from '../types/index';
 import { ponyAPI } from '../App';
 import { parseCharactersPosition, parseGameState } from '../utils/parser';
-import { Dispatch } from 'redux';
-import { GameState, CharactersPosition, PonyName } from '../types';
 
 // action types
 export const UPDATE_CHARACTERS_POSITION = 'UPDATE_CHARACTERS_POSITION';

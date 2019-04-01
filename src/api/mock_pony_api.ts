@@ -1,6 +1,5 @@
-import { PonyName, Direction } from '../types';
+import { PonyName, Direction, APIState } from '../types';
 import { PonyAPI, NewGameResponse } from './pony_api';
-import { APIState } from '../types';
 import { get } from '../utils/fetcher';
 
 const MockPonyApi: PonyAPI = {

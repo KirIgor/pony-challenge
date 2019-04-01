@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Role, CharactersPosition, GameState, Blueprint } from '../../types';
+import { Role, CharactersPosition, GameState, Blueprint } from '../../types/index';
 import { range } from '../../utils/helper';
 
 import MazeCeil from './maze_ceil';

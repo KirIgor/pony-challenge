@@ -1,4 +1,4 @@
-import { RecordFactory, StaticallyTypedRecord } from './utils/immutable_helper';
+import { RecordFactory, StaticallyTypedRecord } from '../utils/immutable_helper';
 import { Map as iMap, List as iList } from 'immutable';
 
 export enum Role {
@@ -61,7 +61,7 @@ const blueprintRecord = RecordFactory<IBlueprintRecord>({
 	sides: 0
 });
 
-class BlueprintRecord extends blueprintRecord
+export class BlueprintRecord extends blueprintRecord
 	implements IBlueprintRecord, StaticallyTypedRecord<IBlueprintRecord> {
 	sides: number;
 	constructor(props: IBlueprintRecord) {

@@ -1,3 +1,5 @@
+import { fromJS } from 'immutable';
+
 import {
 	GameState,
 	APIState,
@@ -8,9 +10,7 @@ import {
 	Position,
 	Role,
 	Point
-} from '../types';
-import { fromJS } from 'immutable';
-
+} from '../types/index';
 import { range } from './helper';
 import { Map as iMap } from 'immutable';
 
