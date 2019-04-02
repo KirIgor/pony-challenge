@@ -5,7 +5,6 @@ import Game from './components/game/game';
 import { newStore } from './store/store';
 import { PonyAPI } from './api/pony_api';
 import ChallengePonyAPI from './api/challenge_pony_api';
-import { parseGameState } from './utils/parser';
 
 import './App.css';
 

@@ -1,9 +1,10 @@
-import { combineReducers } from 'redux';
+import { combineReducers, Reducer } from 'redux';
 
+import { StoreState, StoreAction } from '../store/store';
 import gameReducer from './game';
 
-const rootReducer = combineReducers({
-	gameReducer
+const rootReducer: Reducer<StoreState, StoreAction> = combineReducers({
+	game: gameReducer
 });
 
 export default rootReducer;

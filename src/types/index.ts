@@ -20,7 +20,7 @@ interface IPoint {
 	y: number;
 }
 
-const point = RecordFactory<IPoint>({
+export const point = RecordFactory<IPoint>({
 	x: 0,
 	y: 0
 });

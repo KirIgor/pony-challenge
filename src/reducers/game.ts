@@ -11,7 +11,7 @@ const defaultGameState = new GameState({
 	blueprint: iList<iList<BlueprintRecord>>()
 });
 
-const gameReducer = (state: GameState = defaultGameState, action: GameAction) => {
+const gameReducer = (state: GameState = defaultGameState, action: GameAction): GameState => {
 	switch (action.type) {
 		case INIT_STATE: {
 			const { state } = action.payload;
@@ -21,7 +21,7 @@ const gameReducer = (state: GameState = defaultGameState, action: GameAction) =>
 		case UPDATE_CHARACTERS_POSITION: {
 			const { charactersPosition } = action.payload;
 
-			return state.set('charactersPosition', charactersPosition);
+			return state.set('charactersPosition', charactersPosition) as GameState;
 		}
 		default:
 			return state;
