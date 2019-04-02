@@ -24,7 +24,8 @@ export interface StaticallyTypedRecord<T> extends Constructable<T> {
 		keys: [K1, K2, K3],
 		val: V
 	): StaticallyTypedRecord<T>;
-	toJS(): T;
+	toJS(): { [key: string]: any };
+	toObject(): T;
 }
 
 export const RecordFactory = <T>(seed: T): new (...args: any[]) => StaticallyTypedRecord<T> =>

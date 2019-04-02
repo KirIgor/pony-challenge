@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test game state parser should match snapshot 1`] = `
+exports[`game state parser should match snapshot 1`] = `
 Object {
   "blueprint": Immutable.List [
     Immutable.List [

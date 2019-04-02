@@ -1,0 +1,757 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`game action creators init action creator should dispatch correct action 1`] = `
+Object {
+  "payload": Object {
+    "state": Object {
+      "blueprint": Immutable.List [
+        Immutable.List [
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 6,
+                },
+        ],
+        Immutable.List [
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 3,
+                },
+        ],
+        Immutable.List [
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 3,
+                },
+        ],
+        Immutable.List [
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 3,
+                },
+        ],
+        Immutable.List [
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 6,
+                },
+        ],
+        Immutable.List [
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 3,
+                },
+        ],
+        Immutable.List [
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 3,
+                },
+        ],
+        Immutable.List [
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 2,
+                },
+        ],
+        Immutable.List [
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 3,
+                },
+        ],
+        Immutable.List [
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 6,
+                },
+        ],
+        Immutable.List [
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 3,
+                },
+        ],
+        Immutable.List [
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 2,
+                },
+        ],
+        Immutable.List [
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 3,
+                },
+        ],
+        Immutable.List [
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 0,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 4,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 5,
+                },
+                Immutable.Map {
+                        sides: 1,
+                },
+                Immutable.Map {
+                        sides: 3,
+                },
+        ],
+        Immutable.List [
+                Immutable.Map {
+                        sides: 9,
+                },
+                Immutable.Map {
+                        sides: 9,
+                },
+                Immutable.Map {
+                        sides: 8,
+                },
+                Immutable.Map {
+                        sides: 9,
+                },
+                Immutable.Map {
+                        sides: 12,
+                },
+                Immutable.Map {
+                        sides: 8,
+                },
+                Immutable.Map {
+                        sides: 12,
+                },
+                Immutable.Map {
+                        sides: 8,
+                },
+                Immutable.Map {
+                        sides: 13,
+                },
+                Immutable.Map {
+                        sides: 8,
+                },
+                Immutable.Map {
+                        sides: 9,
+                },
+                Immutable.Map {
+                        sides: 8,
+                },
+                Immutable.Map {
+                        sides: 8,
+                },
+                Immutable.Map {
+                        sides: 9,
+                },
+                Immutable.Map {
+                        sides: 10,
+                },
+        ],
+],
+      "charactersPosition": Immutable.Map {
+        pony: Object {
+                "x": 5,
+                "y": 4,
+              },
+        domokun: Object {
+                "x": 10,
+                "y": 4,
+              },
+        exit: Object {
+                "x": 8,
+                "y": 14,
+              },
+},
+      "height": 15,
+      "mazeId": "c6d8aefa-23fb-42a3-8eeb-347ab807de0d",
+      "width": 15,
+    },
+  },
+  "type": "INIT_STATE",
+}
+`;
+
+exports[`game action creators move action creator should dispatch correct action 1`] = `
+Object {
+  "payload": Object {
+    "charactersPosition": Immutable.Map {
+      pony: Object {
+            "x": 5,
+            "y": 4,
+          },
+      domokun: Object {
+            "x": 10,
+            "y": 4,
+          },
+      exit: Object {
+            "x": 8,
+            "y": 14,
+          },
+},
+  },
+  "type": "UPDATE_CHARACTERS_POSITION",
+}
+`;

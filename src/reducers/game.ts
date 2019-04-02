@@ -3,7 +3,7 @@ import { Map as iMap, List as iList } from 'immutable';
 import { GameState, BlueprintRecord, Role, Point } from '../types/index';
 import { GameAction, UPDATE_CHARACTERS_POSITION, INIT_STATE } from '../actions/game';
 
-const defaultGameState = new GameState({
+export const defaultGameState = new GameState({
 	mazeId: '',
 	width: 0,
 	height: 0,
