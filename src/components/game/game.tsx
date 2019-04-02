@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 
-import { PonyName } from '../../types/index';
+import { PonyName, Direction } from '../../types/index';
 import { init, move } from '../../actions/game';
 import { StoreState } from '../../store/store';
 import { GameState } from '../../types/index';
@@ -14,22 +14,45 @@ interface Props {
 	move: typeof move;
 }
 
-function Game({ gameState, init }: Props) {
+const onMove = (moveF: typeof move) => (e: React.KeyboardEvent) => {
+	const direction = keyCodeToDirection(e.keyCode);
+	if (direction) moveF(direction);
+};
+
+function Game({ gameState, init, move }: Props) {
 	React.useEffect(() => {
-		init(25, 25, PonyName.APPLEJACK, 0);
+		init(15, 15, PonyName.APPLEJACK, 0);
 	}, []);
 
 	return (
-		<div>
+		<div ref={node => node && node.focus()} tabIndex={0} onKeyDown={onMove(move)}>
 			<Maze gameState={gameState} />
-			<div>
-				<button />
-				<button />
-				<button />
-			</div>
 		</div>
 	);
 }
+
+const keyCodeToDirection = (keyCode: number): Direction | undefined => {
+	switch (keyCode) {
+		case 37:
+		case 65: {
+			return Direction.WEST;
+		}
+		case 38:
+		case 87: {
+			return Direction.NORTH;
+		}
+		case 39:
+		case 68: {
+			return Direction.EAST;
+		}
+		case 40:
+		case 83: {
+			return Direction.SOUTH;
+		}
+		default:
+			return undefined;
+	}
+};
 
 const mapStateToProps = (state: StoreState) => ({ gameState: state.game });
 const mapDispatchToProps = (dispatch: Dispatch) => ({

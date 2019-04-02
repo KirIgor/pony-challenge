@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 
 import { Direction, GameState, CharactersPosition, PonyName } from '../types/index';
+import { StoreState } from '../store/store';
 import { ponyAPI } from '../App';
 import { parseCharactersPosition, parseGameState } from '../utils/parser';
 
@@ -27,11 +28,15 @@ export type GameAction = MoveAction | InitAction;
 
 // action creators
 
-export const move = (mazeId: string, direction: Direction) => async (
+export const move = (direction: Direction) => async (
 	dispatch: Dispatch<MoveAction>,
-	getState: () => GameState
+	getState: () => StoreState
 ) => {
-	const apiState = await ponyAPI.makeMove(mazeId, direction);
+	const mazeId = getState().game.get('mazeId');
+	if (mazeId == '') throw Error('initialize game first');
+
+	await ponyAPI.makeMove(mazeId, direction);
+	const apiState = await ponyAPI.getState(mazeId);
 
 	dispatch({
 		type: UPDATE_CHARACTERS_POSITION,
@@ -44,7 +49,7 @@ export const init = (
 	height: number,
 	playerName: PonyName,
 	difficulty: number
-) => async (dispatch: Dispatch<InitAction>, getState: () => GameState) => {
+) => async (dispatch: Dispatch<InitAction>, getState: () => StoreState) => {
 	const { maze_id: mazeId } = await ponyAPI.newGame(width, height, playerName, difficulty);
 	const apiState = await ponyAPI.getState(mazeId);
 

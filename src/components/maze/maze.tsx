@@ -17,9 +17,9 @@ const renderCeils = (
 	charactersPosition: CharactersPosition,
 	blueprint: Blueprint
 ) => {
-	return range(width).map(i => (
-		<Row>
-			{range(height).map(j => (
+	return range(height).map(i => (
+		<Row key={i}>
+			{range(width).map(j => (
 				<MazeCeil
 					key={j}
 					sides={blueprint.getIn([i, j, 'sides'])}
@@ -41,5 +41,5 @@ export default function Maze({
 }
 
 const getRole = (charactersPosition: CharactersPosition, i: number, j: number): Role => {
-	return charactersPosition.findKey(point => point.x == i && point.y == j) || Role.NONE;
+	return charactersPosition.findKey(point => point.x == j && point.y == i) || Role.NONE;
 };

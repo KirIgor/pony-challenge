@@ -4,6 +4,11 @@ export interface NewGameResponse {
 	maze_id: string;
 }
 
+export interface MakeMoveResponse {
+	state: string;
+	'state-result': string;
+}
+
 export interface PonyAPI {
 	newGame: (
 		width: number,
@@ -12,5 +17,5 @@ export interface PonyAPI {
 		difficulty: number
 	) => Promise<NewGameResponse>;
 	getState: (mazeId: string) => Promise<APIState>;
-	makeMove: (mazeId: string, direction: Direction) => Promise<APIState>;
+	makeMove: (mazeId: string, direction: Direction) => Promise<MakeMoveResponse>;
 }
