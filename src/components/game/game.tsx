@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 
-import { PonyName, Direction } from '../../types/index';
+import { PonyName, Direction, RainbowType, RainbowPath, Role } from '../../types/index';
 import { init, move } from '../../actions/game';
 import { StoreState } from '../../store/store';
 import { GameState } from '../../types/index';
@@ -14,22 +14,49 @@ interface Props {
 	move: typeof move;
 }
 
-const onMove = (moveF: typeof move) => (e: React.KeyboardEvent) => {
+const onMove = (moveF: typeof move) => (
+	gameState: GameState,
+	setPath: React.Dispatch<React.SetStateAction<RainbowPath>>
+) => (e: React.KeyboardEvent) => {
 	const direction = keyCodeToDirection(e.keyCode);
-	if (direction) moveF(direction);
+	if (direction) {
+		moveF(direction);
+
+		const type: RainbowType = directionToRainbowType(direction);
+		const { x, y } = gameState.charactersPosition.get(Role.PONY)!;
+		setPath(prev => prev.slice(-1).concat({ x, y, type }) as RainbowPath);
+	}
 };
 
 function Game({ gameState, init, move }: Props) {
 	React.useEffect(() => {
-		init(15, 15, PonyName.APPLEJACK, 0);
+		init(15, 15, PonyName.APPLEJACK, 10);
 	}, []);
 
+	const [rainbowPath, setPath] = React.useState<RainbowPath>([]);
+
 	return (
-		<div ref={node => node && node.focus()} tabIndex={0} onKeyDown={onMove(move)}>
-			<Maze gameState={gameState} ponyName={PonyName.APPLEJACK} />
+		<div
+			ref={node => node && node.focus()}
+			tabIndex={0}
+			onKeyDown={onMove(move)(gameState, setPath)}>
+			<Maze gameState={gameState} ponyName={PonyName.APPLEJACK} rainbowPath={rainbowPath} />
 		</div>
 	);
 }
+
+const directionToRainbowType = (direction: Direction): RainbowType => {
+	switch (direction) {
+		case Direction.WEST:
+		case Direction.EAST: {
+			return RainbowType.HORIZONTAL;
+		}
+		case Direction.NORTH:
+		case Direction.SOUTH: {
+			return RainbowType.VERTICAL;
+		}
+	}
+};
 
 const keyCodeToDirection = (keyCode: number): Direction | undefined => {
 	switch (keyCode) {

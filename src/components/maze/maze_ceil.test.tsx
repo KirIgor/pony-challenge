@@ -18,7 +18,7 @@ describe('maze ceil', () => {
 
 		range(15).forEach(i => {
 			const mazeCeil = enzyme.shallow(
-				<MazeCeil sides={i} role={Role.NONE} ponyName={PonyName.APPLEJACK} />
+				<MazeCeil sides={i} role={Role.NONE} ponyName={PonyName.APPLEJACK} borderConnections={0} />
 			);
 			const className = mazeCeil.find('.ceil').getElement().props.className;
 

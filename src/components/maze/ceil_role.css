@@ -1,4 +1,9 @@
-.role_image {
+.primary_role_image {
 	width: 20px;
+	height: 20px;
+}
+
+.rainbow_role_image {
+	width: 7px;
 	height: 20px;
 }

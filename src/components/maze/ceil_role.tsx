@@ -12,13 +12,25 @@ interface Props {
 export default function CeilRole({ ponyName, role = Role.NONE }: Props) {
 	switch (role) {
 		case Role.PONY: {
-			return <img className="role_image" src={getPonyImgSrc(ponyName)} />;
+			return <img className="primary_role_image" src={getPonyImgSrc(ponyName)} />;
 		}
 		case Role.DOMOKUN: {
-			return <img className="role_image" src="/images/domokun.png" />;
+			return <img className="primary_role_image" src="/images/domokun.png" />;
 		}
 		case Role.EXIT: {
-			return <img className="role_image" src="/images/rainbow_cake.png" />;
+			return <img className="primary_role_image" src="/images/rainbow_cake.png" />;
+		}
+		case Role.RAINBOW_HORIZONTAL: {
+			return (
+				<img
+					className="rainbow_role_image"
+					src="/images/rainbow.png"
+					style={{ transform: 'rotate(90deg)' }}
+				/>
+			);
+		}
+		case Role.RAINBOW_VERTICAL: {
+			return <img className="rainbow_role_image" src="/images/rainbow.png" />;
 		}
 		case Role.NONE: {
 			return null;

@@ -23,7 +23,9 @@ const testState = new GameState({
 	)
 });
 
-const maze = enzyme.render(<Maze gameState={testState} ponyName={PonyName.APPLEJACK} />);
+const maze = enzyme.render(
+	<Maze gameState={testState} ponyName={PonyName.APPLEJACK} rainbowPath={[]} />
+);
 
 describe('maze', () => {
 	it('renders correct num of rows', () => {

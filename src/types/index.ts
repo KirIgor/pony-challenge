@@ -5,6 +5,8 @@ export enum Role {
 	PONY = 'pony',
 	DOMOKUN = 'domokun',
 	EXIT = 'exit',
+	RAINBOW_HORIZONTAL = 'rainbow_horizontal',
+	RAINBOW_VERTICAL = 'rainbow_vertical',
 	NONE = 'none'
 }
 
@@ -110,4 +112,18 @@ export interface APIState {
 		state: string;
 		'state-result': string;
 	};
+}
+
+export enum RainbowType {
+	VERTICAL = 'VERTICAL',
+	HORIZONTAL = 'HORIZONTAL'
+}
+export type RainbowPosition = { x: number; y: number; type: RainbowType };
+export type RainbowPath = [] | [RainbowPosition] | [RainbowPosition, RainbowPosition];
+
+export enum BorderConnection {
+	TOP_LEFT = 1,
+	TOP_RIGHT = 2,
+	BOTTOM_LEFT = 4,
+	BOTTOM_RIGHT = 8
 }
