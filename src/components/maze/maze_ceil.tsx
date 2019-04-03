@@ -1,7 +1,9 @@
 import * as React from 'react';
 import classNames from 'classnames';
 
-import { Role, Side } from '../../types/index';
+import { Role, Side, PonyName } from '../../types/index';
+
+import CeilRole from './ceil_role';
 
 import './maze_ceil.css';
 
@@ -9,26 +11,10 @@ import './maze_ceil.css';
 interface Props {
 	sides: number;
 	role: Role;
+	ponyName: PonyName;
 }
 
-const renderRoleImage = (role: Role): JSX.Element | null => {
-	switch (role) {
-		case Role.PONY: {
-			return <span>P</span>;
-		}
-		case Role.DOMOKUN: {
-			return <span>D</span>;
-		}
-		case Role.EXIT: {
-			return <span>E</span>;
-		}
-		case Role.NONE: {
-			return null;
-		}
-	}
-};
-
-export default function MazeCeil({ sides, role = Role.NONE }: Props) {
+export default function MazeCeil({ sides, ponyName, role = Role.NONE }: Props) {
 	return (
 		<div
 			className={classNames({
@@ -38,7 +24,7 @@ export default function MazeCeil({ sides, role = Role.NONE }: Props) {
 				top: sides & Side.TOP,
 				bottom: sides & Side.BOTTOM
 			})}>
-			{renderRoleImage(role)}
+			<CeilRole ponyName={ponyName} role={role} />
 		</div>
 	);
 }

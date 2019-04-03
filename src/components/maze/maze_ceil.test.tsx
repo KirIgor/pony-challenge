@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as enzyme from 'enzyme';
 
 import { range } from '../../utils/helper';
-import { Role } from '../../types/index';
+import { Role, PonyName } from '../../types/index';
 import MazeCeil from './maze_ceil';
 
 describe('maze ceil', () => {
@@ -17,7 +17,9 @@ describe('maze ceil', () => {
 		const shouldContain = (i: number, side: number) => i & side;
 
 		range(15).forEach(i => {
-			const mazeCeil = enzyme.shallow(<MazeCeil sides={i} role={Role.NONE} />);
+			const mazeCeil = enzyme.shallow(
+				<MazeCeil sides={i} role={Role.NONE} ponyName={PonyName.APPLEJACK} />
+			);
 			const className = mazeCeil.find('.ceil').getElement().props.className;
 
 			[1, 2, 4, 8].forEach(side => {

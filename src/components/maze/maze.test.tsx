@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as enzyme from 'enzyme';
 import { Map as iMap, List as iList } from 'immutable';
 
-import { GameState, Role, Point, BlueprintRecord } from '../../types/index';
+import { GameState, Role, Point, BlueprintRecord, PonyName } from '../../types/index';
 import Maze from './maze';
 
 const width = 3;
@@ -23,7 +23,7 @@ const testState = new GameState({
 	)
 });
 
-const maze = enzyme.render(<Maze gameState={testState} />);
+const maze = enzyme.render(<Maze gameState={testState} ponyName={PonyName.APPLEJACK} />);
 
 describe('maze', () => {
 	it('renders correct num of rows', () => {

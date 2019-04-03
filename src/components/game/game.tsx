@@ -26,7 +26,7 @@ function Game({ gameState, init, move }: Props) {
 
 	return (
 		<div ref={node => node && node.focus()} tabIndex={0} onKeyDown={onMove(move)}>
-			<Maze gameState={gameState} />
+			<Maze gameState={gameState} ponyName={PonyName.APPLEJACK} />
 		</div>
 	);
 }

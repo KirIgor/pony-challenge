@@ -1,9 +1,9 @@
 import { PonyName, Direction, APIState } from '../types';
 import { PonyAPI } from './pony_api';
 
-import * as newGameResponse from '../../assets/mockapi/id.json';
-import * as getStateResponse from '../../assets/mockapi/state.json';
-import * as moveResponse from '../../assets/mockapi/move.json';
+import * as newGameResponse from './mockapi/id.json';
+import * as getStateResponse from './mockapi/state.json';
+import * as moveResponse from './mockapi/move.json';
 
 const MockPonyApi: PonyAPI = {
 	newGame: (width: number, height: number, playerName: PonyName, difficulty: number) =>
