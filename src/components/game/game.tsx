@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 
-import { PonyName, Direction, RainbowType, RainbowPath, Role } from '../../types/index';
+import { PonyName, Direction, RainbowPath, Role } from '../../types/index';
 import { init, move } from '../../actions/game';
 import { StoreState } from '../../store/store';
 import { GameState } from '../../types/index';
@@ -22,9 +22,8 @@ const onMove = (moveF: typeof move) => (
 	if (direction) {
 		moveF(direction);
 
-		const type: RainbowType = directionToRainbowType(direction);
 		const { x, y } = gameState.charactersPosition.get(Role.PONY)!;
-		setPath(prev => prev.slice(-1).concat({ x, y, type }) as RainbowPath);
+		setPath(prev => prev.slice(-1).concat({ x, y, direction }) as RainbowPath);
 	}
 };
 
@@ -44,19 +43,6 @@ function Game({ gameState, init, move }: Props) {
 		</div>
 	);
 }
-
-const directionToRainbowType = (direction: Direction): RainbowType => {
-	switch (direction) {
-		case Direction.WEST:
-		case Direction.EAST: {
-			return RainbowType.HORIZONTAL;
-		}
-		case Direction.NORTH:
-		case Direction.SOUTH: {
-			return RainbowType.VERTICAL;
-		}
-	}
-};
 
 const keyCodeToDirection = (keyCode: number): Direction | undefined => {
 	switch (keyCode) {

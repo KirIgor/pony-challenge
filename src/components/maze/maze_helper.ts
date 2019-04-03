@@ -2,13 +2,15 @@ import {
 	Role,
 	Side,
 	Blueprint,
-	RainbowPath,
 	CharactersPosition,
-	RainbowPosition,
+	BorderConnection,
+	RainbowPath,
 	RainbowType,
-	BorderConnection
+	RainbowPosition,
+	Direction
 } from '../../types/index';
-// border radius
+
+// border connections
 
 const isBorderConnectionTopLeft = (
 	blueprint: Blueprint,
@@ -113,34 +115,57 @@ export const getBorderConnections = (
 
 // role
 
-const getPrimaryRole = (
-	charactersPosition: CharactersPosition,
-	x: number,
-	y: number
-): Role | undefined => {
-	return charactersPosition.findKey(point => point.x == x && point.y == y);
+export const getRole = (charactersPosition: CharactersPosition, x: number, y: number): Role => {
+	return charactersPosition.findKey(point => point.x == x && point.y == y) || Role.NONE;
 };
 
-const getRainbowRole = (rainbowPath: RainbowPath, x: number, y: number): Role | undefined => {
-	const curPosition = (rainbowPath as RainbowPosition[]).find(pos => pos.x == x && pos.y == y);
+// rainbow
 
-	if (curPosition) {
-		switch (curPosition.type) {
-			case RainbowType.HORIZONTAL:
-				return Role.RAINBOW_HORIZONTAL;
-			case RainbowType.VERTICAL:
-				return Role.RAINBOW_VERTICAL;
+export const getRainbowType = (rainbowPath: RainbowPath, x: number, y: number): RainbowType => {
+	if (rainbowPath.length == 0) return RainbowType.NONE;
+	if (rainbowPath.length == 1) {
+		const { x: rx, y: ry } = rainbowPath[0];
+		switch (rainbowPath[0].direction) {
+			case Direction.NORTH:
+			case Direction.SOUTH: {
+				return rx == x && ry == y ? RainbowType.NORTH : RainbowType.NONE;
+			}
+			case Direction.WEST:
+			case Direction.EAST: {
+				return rx == x && ry == y ? RainbowType.WEST : RainbowType.NONE;
+			}
 		}
 	}
+	if (rainbowPath.length == 2) {
+		if (rainbowPath[1].x == x && rainbowPath[1].y == y)
+			return getRainbowType(rainbowPath.slice(-1) as RainbowPath, x, y);
 
-	return undefined;
-};
+		if (rainbowPath[0].x != x || rainbowPath[0].y != y) return RainbowType.NONE;
 
-export const getRole = (
-	charactersPosition: CharactersPosition,
-	rainbowPath: RainbowPath,
-	x: number,
-	y: number
-): Role => {
-	return getPrimaryRole(charactersPosition, x, y) || getRainbowRole(rainbowPath, x, y) || Role.NONE;
+		const prev: RainbowPosition = rainbowPath[0];
+		const next: RainbowPosition = rainbowPath[1];
+
+		if (
+			(prev.direction == Direction.NORTH && next.direction == Direction.EAST) ||
+			(prev.direction == Direction.WEST && next.direction == Direction.SOUTH)
+		) {
+			return RainbowType.NORTH_TO_EAST;
+		} else if (
+			(prev.direction == Direction.EAST && next.direction == Direction.SOUTH) ||
+			(prev.direction == Direction.NORTH && next.direction == Direction.WEST)
+		) {
+			return RainbowType.EAST_TO_SOUTH;
+		} else if (
+			(prev.direction == Direction.SOUTH && next.direction == Direction.WEST) ||
+			(prev.direction == Direction.NORTH && next.direction == Direction.EAST)
+		) {
+			return RainbowType.SOUTH_TO_WEST;
+		} else if (
+			(prev.direction == Direction.WEST && next.direction == Direction.NORTH) ||
+			(prev.direction == Direction.SOUTH && next.direction == Direction.EAST)
+		) {
+			return RainbowType.WEST_TO_NORTH;
+		}
+	}
+	return RainbowType.NONE;
 };

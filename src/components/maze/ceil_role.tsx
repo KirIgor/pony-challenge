@@ -20,18 +20,6 @@ export default function CeilRole({ ponyName, role = Role.NONE }: Props) {
 		case Role.EXIT: {
 			return <img className="primary_role_image" src="/images/rainbow_cake.png" />;
 		}
-		case Role.RAINBOW_HORIZONTAL: {
-			return (
-				<img
-					className="rainbow_role_image"
-					src="/images/rainbow.png"
-					style={{ transform: 'rotate(90deg)' }}
-				/>
-			);
-		}
-		case Role.RAINBOW_VERTICAL: {
-			return <img className="rainbow_role_image" src="/images/rainbow.png" />;
-		}
 		case Role.NONE: {
 			return null;
 		}

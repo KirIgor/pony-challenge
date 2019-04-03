@@ -1,7 +1,7 @@
 import * as React from 'react';
 // import classNames from 'classnames';
 
-import { Role, Side, PonyName, BorderConnection } from '../../types/index';
+import { Role, Side, PonyName, BorderConnection, RainbowType } from '../../types/index';
 
 import CeilRole from './ceil_role';
 
@@ -14,6 +14,7 @@ interface Props {
 	role: Role;
 	ponyName: PonyName;
 	borderConnections: number;
+	rainbowType: RainbowType;
 }
 
 const renderBorders = (sides: number) => {

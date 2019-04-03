@@ -5,8 +5,6 @@ export enum Role {
 	PONY = 'pony',
 	DOMOKUN = 'domokun',
 	EXIT = 'exit',
-	RAINBOW_HORIZONTAL = 'rainbow_horizontal',
-	RAINBOW_VERTICAL = 'rainbow_vertical',
 	NONE = 'none'
 }
 
@@ -115,10 +113,15 @@ export interface APIState {
 }
 
 export enum RainbowType {
-	VERTICAL = 'VERTICAL',
-	HORIZONTAL = 'HORIZONTAL'
+	NORTH_TO_EAST = 'NORTH_TO_EAST',
+	EAST_TO_SOUTH = 'EAST_TO_SOUTH',
+	SOUTH_TO_WEST = 'SOUTH_TO_WEST',
+	WEST_TO_NORTH = 'WEST_TO_NORTH',
+	NORTH = 'NORTH',
+	WEST = 'WEST',
+	NONE = 'NONE'
 }
-export type RainbowPosition = { x: number; y: number; type: RainbowType };
+export type RainbowPosition = { x: number; y: number; direction: Direction };
 export type RainbowPath = [] | [RainbowPosition] | [RainbowPosition, RainbowPosition];
 
 export enum BorderConnection {
