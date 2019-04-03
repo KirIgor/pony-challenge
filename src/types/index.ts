@@ -39,8 +39,7 @@ export enum PonyName {
 	FLUTTERSHY = 'Fluttershy',
 	RARITY = 'Rarity',
 	PINKIE_PIE = 'Pinkie Pie',
-	RAINBOW_DASH = 'Rainbow Dash',
-	SPIKE = 'Spike'
+	RAINBOW_DASH = 'Rainbow Dash'
 }
 
 export enum Direction {
