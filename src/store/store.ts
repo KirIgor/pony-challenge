@@ -11,7 +11,7 @@ export interface StoreState {
 
 export type StoreAction = Action<GameAction>;
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const newStore = () => {
 	return createStore<StoreState, StoreAction, {}, {}>(
 		rootReducer,
