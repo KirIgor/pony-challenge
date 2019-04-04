@@ -125,46 +125,59 @@ export const getRainbowType = (rainbowPath: RainbowPath, x: number, y: number): 
 	if (rainbowPath.length == 0) return RainbowType.NONE;
 	if (rainbowPath.length == 1) {
 		const { x: rx, y: ry } = rainbowPath[0];
+		if (rx != x || ry != y) return RainbowType.NONE;
+
 		switch (rainbowPath[0].direction) {
-			case Direction.NORTH:
-			case Direction.SOUTH: {
-				return rx == x && ry == y ? RainbowType.NORTH : RainbowType.NONE;
-			}
 			case Direction.WEST:
 			case Direction.EAST: {
-				return rx == x && ry == y ? RainbowType.WEST : RainbowType.NONE;
+				return RainbowType.WEST_RED_TO_TOP;
+			}
+			case Direction.NORTH:
+			case Direction.SOUTH: {
+				return RainbowType.NORTH_RED_TO_LEFT;
 			}
 		}
 	}
 	if (rainbowPath.length == 2) {
-		if (rainbowPath[1].x == x && rainbowPath[1].y == y)
-			return getRainbowType(rainbowPath.slice(-1) as RainbowPath, x, y);
-
-		if (rainbowPath[0].x != x || rainbowPath[0].y != y) return RainbowType.NONE;
-
 		const prev: RainbowPosition = rainbowPath[0];
 		const next: RainbowPosition = rainbowPath[1];
 
 		if (
-			(prev.direction == Direction.NORTH && next.direction == Direction.EAST) ||
-			(prev.direction == Direction.WEST && next.direction == Direction.SOUTH)
+			(prev.direction == Direction.NORTH && next.direction == Direction.NORTH) ||
+			(prev.direction == Direction.SOUTH && next.direction == Direction.SOUTH)
 		) {
-			return RainbowType.NORTH_TO_EAST;
+			if ((prev.x == x && prev.y == y) || (next.x == x && next.y == y))
+				return RainbowType.NORTH_RED_TO_LEFT;
 		} else if (
-			(prev.direction == Direction.EAST && next.direction == Direction.SOUTH) ||
-			(prev.direction == Direction.NORTH && next.direction == Direction.WEST)
+			(prev.direction == Direction.WEST && next.direction == Direction.WEST) ||
+			(prev.direction == Direction.EAST && next.direction == Direction.EAST)
 		) {
-			return RainbowType.EAST_TO_SOUTH;
-		} else if (
-			(prev.direction == Direction.SOUTH && next.direction == Direction.WEST) ||
-			(prev.direction == Direction.NORTH && next.direction == Direction.EAST)
-		) {
-			return RainbowType.SOUTH_TO_WEST;
-		} else if (
-			(prev.direction == Direction.WEST && next.direction == Direction.NORTH) ||
-			(prev.direction == Direction.SOUTH && next.direction == Direction.EAST)
-		) {
-			return RainbowType.WEST_TO_NORTH;
+			if ((prev.x == x && prev.y == y) || (next.x == x && next.y == y))
+				return RainbowType.WEST_RED_TO_TOP;
+		} else if (prev.direction == Direction.NORTH && next.direction == Direction.EAST) {
+			if (prev.x == x && prev.y == y) return RainbowType.NORTH_RED_TO_LEFT;
+			if (next.x == x && next.y == y) return RainbowType.NORTH_TO_EAST;
+		} else if (prev.direction == Direction.WEST && next.direction == Direction.SOUTH) {
+			if (prev.x == x && prev.y == y) return RainbowType.WEST_RED_TO_TOP;
+			if (next.x == x && next.y == y) return RainbowType.NORTH_TO_EAST;
+		} else if (prev.direction == Direction.EAST && next.direction == Direction.SOUTH) {
+			if (prev.x == x && prev.y == y) return RainbowType.WEST_RED_TO_TOP;
+			if (next.x == x && next.y == y) return RainbowType.EAST_TO_SOUTH;
+		} else if (prev.direction == Direction.NORTH && next.direction == Direction.WEST) {
+			if (prev.x == x && prev.y == y) return RainbowType.NORTH_RED_TO_RIHGT;
+			if (next.x == x && next.y == y) return RainbowType.EAST_TO_SOUTH;
+		} else if (prev.direction == Direction.SOUTH && next.direction == Direction.WEST) {
+			if (prev.x == x && prev.y == y) return RainbowType.NORTH_RED_TO_RIHGT;
+			if (next.x == x && next.y == y) return RainbowType.SOUTH_TO_WEST;
+		} else if (prev.direction == Direction.EAST && next.direction == Direction.NORTH) {
+			if (prev.x == x && prev.y == y) return RainbowType.WEST_RED_TO_BOTTOM;
+			if (next.x == x && next.y == y) return RainbowType.SOUTH_TO_WEST;
+		} else if (prev.direction == Direction.WEST && next.direction == Direction.NORTH) {
+			if (prev.x == x && prev.y == y) return RainbowType.WEST_RED_TO_BOTTOM;
+			if (next.x == x && next.y == y) return RainbowType.WEST_TO_NORTH;
+		} else if (prev.direction == Direction.SOUTH && next.direction == Direction.EAST) {
+			if (prev.x == x && prev.y == y) return RainbowType.NORTH_RED_TO_LEFT;
+			if (next.x == x && next.y == y) return RainbowType.WEST_TO_NORTH;
 		}
 	}
 	return RainbowType.NONE;

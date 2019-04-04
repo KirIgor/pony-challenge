@@ -33,6 +33,6 @@ describe('maze', () => {
 	});
 
 	it('renders correct num of children', () => {
-		expect(maze.find('.ceil').length).toBe(width * height);
+		expect(maze.find('.cell').length).toBe(width * height);
 	});
 });

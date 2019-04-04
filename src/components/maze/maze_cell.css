@@ -1,4 +1,4 @@
-.ceil {
+.cell {
 	width: 25px;
 	height: 25px;
 	box-sizing: border-box;
@@ -13,6 +13,7 @@
 	left: -1.5px;
 	top: 0px;
 	background-color: black;
+	z-index: 1;
 }
 
 .right {
@@ -22,6 +23,7 @@
 	right: -1.5px;
 	top: 0px;
 	background-color: black;
+	z-index: 1;
 }
 
 .top {
@@ -31,6 +33,7 @@
 	top: -1.5px;
 	left: 0px;
 	background-color: black;
+	z-index: 1;
 }
 
 .bottom {
@@ -40,6 +43,7 @@
 	bottom: -1.5px;
 	left: 0px;
 	background-color: black;
+	z-index: 1;
 }
 
 .top_left {
@@ -51,6 +55,7 @@
 	position: absolute;
 	top: -1.5px;
 	left: -1.5px;
+	z-index: 1;
 }
 
 .top_right {
@@ -62,6 +67,7 @@
 	position: absolute;
 	top: -1.5px;
 	right: -1.5px;
+	z-index: 1;
 }
 
 .bottom_left {
@@ -73,6 +79,7 @@
 	position: absolute;
 	bottom: -1.5px;
 	left: -1.5px;
+	z-index: 1;
 }
 
 .bottom_right {
@@ -84,15 +91,49 @@
 	position: absolute;
 	bottom: -1.5px;
 	right: -1.5px;
+	z-index: 1;
+}
+
+@keyframes rainbow_plain {
+	0% {
+		background-image: url('/images/rainbow/rainbow_1.png');
+	}
+	50% {
+		background-image: url('/images/rainbow/rainbow_2.png');
+	}
+	100% {
+		background-image: url('/images/rainbow/rainbow_1.png');
+	}
+}
+
+@keyframes rainbow_connection {
+	0% {
+		background-image: url('/images/rainbow/rainbow_connection_1.png');
+	}
+	50% {
+		background-image: url('/images/rainbow/rainbow_connection_2.png');
+	}
+	100% {
+		background-image: url('/images/rainbow/rainbow_connection_1.png');
+	}
 }
 
 .rainbow_image_plain {
-	width: 20px;
-	height: 20px;
-	background-image: url('/images/rainbow/rainbow_1.png');
+	width: 60px;
+	height: 30px;
+	position: absolute;
+	animation: rainbow_plain 0.7s step-end infinite;
+	top: -3px;
+	left: -70%;
+	z-index: 0;
 }
 
 .rainbow_image_connection {
-	width: 20px;
-	height: 20px;
+	width: 90px;
+	height: 90px;
+	position: absolute;
+	animation: rainbow_connection 0.7s step-end infinite;
+	top: -100%;
+	left: -100%;
+	z-index: 0;
 }

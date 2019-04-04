@@ -4,7 +4,7 @@ import { CharactersPosition, GameState, Blueprint, PonyName, RainbowPath } from 
 import { range } from '../../utils/helper';
 import { getRole, getBorderConnections, getRainbowType } from './maze_helper';
 
-import MazeCeil from './maze_ceil';
+import MazeCell from './maze_cell';
 
 import './maze.css';
 
@@ -14,7 +14,7 @@ interface Props {
 	rainbowPath: RainbowPath;
 }
 
-const renderCeils = (
+const renderCells = (
 	width: number,
 	height: number,
 	ponyName: PonyName,
@@ -25,7 +25,7 @@ const renderCeils = (
 	return range(height).map(i => (
 		<Row key={i}>
 			{range(width).map(j => (
-				<MazeCeil
+				<MazeCell
 					key={j}
 					sides={blueprint.getIn([i, j, 'sides'])}
 					role={getRole(charactersPosition, j, i)}
@@ -48,6 +48,6 @@ export default function Maze({
 	gameState: { width, height, charactersPosition, blueprint }
 }: Props) {
 	return (
-		<div>{renderCeils(width, height, ponyName, charactersPosition, rainbowPath, blueprint)}</div>
+		<div>{renderCells(width, height, ponyName, charactersPosition, rainbowPath, blueprint)}</div>
 	);
 }

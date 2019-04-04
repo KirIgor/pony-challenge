@@ -29,7 +29,7 @@ const onMove = (moveF: typeof move) => (
 
 function Game({ gameState, init, move }: Props) {
 	React.useEffect(() => {
-		init(25, 25, PonyName.APPLEJACK, 7);
+		init(15, 15, PonyName.APPLEJACK, 7);
 	}, []);
 
 	const [rainbowPath, setPath] = React.useState<RainbowPath>([]);

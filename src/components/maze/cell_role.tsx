@@ -2,14 +2,14 @@ import * as React from 'react';
 
 import { Role, PonyName } from '../../types/index';
 
-import './ceil_role.css';
+import './cell_role.css';
 
 interface Props {
 	role: Role;
 	ponyName: PonyName;
 }
 
-export default function CeilRole({ ponyName, role = Role.NONE }: Props) {
+export default function CellRole({ ponyName, role = Role.NONE }: Props) {
 	switch (role) {
 		case Role.PONY: {
 			return <img className="primary_role_image" src={getPonyImgSrc(ponyName)} />;
