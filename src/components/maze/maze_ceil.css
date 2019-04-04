@@ -85,3 +85,14 @@
 	bottom: -1.5px;
 	right: -1.5px;
 }
+
+.rainbow_image_plain {
+	width: 20px;
+	height: 20px;
+	background-image: url('/images/rainbow/rainbow_1.png');
+}
+
+.rainbow_image_connection {
+	width: 20px;
+	height: 20px;
+}

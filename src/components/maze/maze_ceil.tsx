@@ -47,6 +47,27 @@ const renderBorderConnections = (borderConnections: number) => {
 	);
 };
 
+// const renderRainbow = (rainbowType: RainbowType) => {
+// 	switch (rainbowType) {
+// 		case RainbowType.WEST: {
+// 			return <div className="rainbow_image_plain" />;
+// 		}
+// 		case RainbowType.NORTH: {
+// 		}
+// 		case RainbowType.NORTH_TO_EAST: {
+// 		}
+// 		case RainbowType.EAST_TO_SOUTH: {
+// 		}
+// 		case RainbowType.SOUTH_TO_WEST: {
+// 		}
+// 		case RainbowType.WEST_TO_NORTH: {
+// 		}
+// 		case RainbowType.NONE: {
+// 			return null;
+// 		}
+// 	}
+// };
+
 export default function MazeCeil({ sides, borderConnections, ponyName, role = Role.NONE }: Props) {
 	return (
 		<div className="ceil">
