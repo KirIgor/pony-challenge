@@ -164,6 +164,15 @@ export const getRainbowType = (rainbowPath: RainbowPath, x: number, y: number): 
 		const prev: RainbowPosition = rainbowPath[0];
 		const next: RainbowPosition = rainbowPath[1];
 
+		if (
+			(prev.direction == Direction.EAST && next.direction == Direction.WEST) ||
+			(prev.direction == Direction.WEST && next.direction == Direction.EAST) ||
+			(prev.direction == Direction.NORTH && next.direction == Direction.SOUTH) ||
+			(prev.direction == Direction.SOUTH && next.direction == Direction.NORTH)
+		) {
+			return RainbowType.NONE;
+		}
+
 		if (prev.x == x && prev.y == y)
 			return getRainbowType(rainbowPath.slice(0, 1) as RainbowPath, x, y);
 		if (next.x != x || next.y != y) return RainbowType.NONE;

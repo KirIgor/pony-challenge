@@ -9,7 +9,7 @@ interface Props {
 	ponyName: PonyName;
 }
 
-export default function CellRole({ ponyName, role = Role.NONE }: Props) {
+const CellRole = React.memo(({ ponyName, role = Role.NONE }: Props) => {
 	switch (role) {
 		case Role.PONY: {
 			return <img className="primary_role_image" src={getPonyImgSrc(ponyName)} />;
@@ -24,8 +24,10 @@ export default function CellRole({ ponyName, role = Role.NONE }: Props) {
 			return null;
 		}
 	}
-}
+});
 
 const getPonyImgSrc = (ponyName: PonyName) => {
 	return `/images/ponies/${ponyName.toLowerCase()}.png`;
 };
+
+export default CellRole;

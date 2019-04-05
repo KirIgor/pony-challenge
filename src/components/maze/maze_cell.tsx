@@ -73,25 +73,23 @@ const renderRainbow = (rainbowType: RainbowType) => {
 	}
 };
 
-export default function MazeCell({
-	sides,
-	rainbowType,
-	borderConnections,
-	ponyName,
-	role = Role.NONE
-}: Props) {
-	return (
-		<div className="cell">
-			{renderBorders(sides)}
-			{renderBorderConnections(borderConnections)}
-			{renderRainbow(rainbowType)}
-			<CellRole ponyName={ponyName} role={role} />
-		</div>
-	);
-}
+const MazeCell = React.memo(
+	({ sides, rainbowType, borderConnections, ponyName, role = Role.NONE }: Props) => {
+		return (
+			<div className="cell">
+				{renderBorders(sides)}
+				{renderBorderConnections(borderConnections)}
+				{renderRainbow(rainbowType)}
+				<CellRole ponyName={ponyName} role={role} />
+			</div>
+		);
+	}
+);
 
 const isSide = (sides: number, side: Side): boolean => (sides & side) != 0;
 const isBorderConnection = (
 	borderConnections: number,
 	borderConnection: BorderConnection
 ): boolean => (borderConnections & borderConnection) != 0;
+
+export default MazeCell;

@@ -38,16 +38,20 @@ const renderCells = (
 	));
 };
 
-function Row({ children }: { children: JSX.Element[] }) {
+const Row = React.memo(({ children }: { children: JSX.Element[] }) => {
 	return <div className="row">{children}</div>;
-}
+});
 
-export default function Maze({
-	rainbowPath,
-	ponyName,
-	gameState: { width, height, charactersPosition, blueprint }
-}: Props) {
-	return (
-		<div>{renderCells(width, height, ponyName, charactersPosition, rainbowPath, blueprint)}</div>
-	);
-}
+const Maze = React.memo(
+	({
+		rainbowPath,
+		ponyName,
+		gameState: { width, height, charactersPosition, blueprint }
+	}: Props) => {
+		return (
+			<div>{renderCells(width, height, ponyName, charactersPosition, rainbowPath, blueprint)}</div>
+		);
+	}
+);
+
+export default Maze;

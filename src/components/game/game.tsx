@@ -2,8 +2,9 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 
-import { PonyName, Direction, RainbowPath, Role } from '../../types/index';
+import { PonyName, Direction, RainbowPath, Role, Side } from '../../types/index';
 import { init, move } from '../../actions/game';
+import { hasSide } from '../maze/maze_helper';
 import { StoreState } from '../../store/store';
 import { GameState } from '../../types/index';
 import Maze from '../maze/maze';
@@ -19,15 +20,22 @@ const onMove = (moveF: typeof move) => (
 	setPath: React.Dispatch<React.SetStateAction<RainbowPath>>
 ) => async (e: React.KeyboardEvent) => {
 	const direction = keyCodeToDirection(e.keyCode);
-	if (direction) {
+	if (!direction) return;
+
+	const side = directionToSide(direction);
+
+	const { x, y } = gameState.charactersPosition.get(Role.PONY)!;
+	const width = gameState.width;
+	const height = gameState.height;
+
+	if (!hasSide(gameState.blueprint, x, y, width, height, side)) {
 		await moveF(direction);
 
-		const { x, y } = gameState.charactersPosition.get(Role.PONY)!;
 		setPath(prev => prev.slice(-1).concat({ x, y, direction }) as RainbowPath);
 	}
 };
 
-function Game({ gameState, init, move }: Props) {
+const Game = React.memo(({ gameState, init, move }: Props) => {
 	React.useEffect(() => {
 		init(15, 15, PonyName.APPLEJACK, 7);
 	}, []);
@@ -42,26 +50,35 @@ function Game({ gameState, init, move }: Props) {
 			<Maze gameState={gameState} ponyName={PonyName.APPLEJACK} rainbowPath={rainbowPath} />
 		</div>
 	);
-}
+});
+
+const directionToSide = (direction: Direction): Side => {
+	switch (direction) {
+		case Direction.WEST:
+			return Side.LEFT;
+		case Direction.EAST:
+			return Side.RIGHT;
+		case Direction.NORTH:
+			return Side.TOP;
+		case Direction.SOUTH:
+			return Side.BOTTOM;
+	}
+};
 
 const keyCodeToDirection = (keyCode: number): Direction | undefined => {
 	switch (keyCode) {
 		case 37:
-		case 65: {
+		case 65:
 			return Direction.WEST;
-		}
 		case 38:
-		case 87: {
+		case 87:
 			return Direction.NORTH;
-		}
 		case 39:
-		case 68: {
+		case 68:
 			return Direction.EAST;
-		}
 		case 40:
-		case 83: {
+		case 83:
 			return Direction.SOUTH;
-		}
 		default:
 			return undefined;
 	}
