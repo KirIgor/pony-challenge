@@ -28,11 +28,11 @@ const maze = enzyme.render(
 );
 
 describe('maze', () => {
-	it('renders correct num of rows', () => {
+	it('should render correct num of rows', () => {
 		expect(maze.find('.row').length).toBe(height);
 	});
 
-	it('renders correct num of children', () => {
+	it('should render correct num of children', () => {
 		expect(maze.find('.cell').length).toBe(width * height);
 	});
 });

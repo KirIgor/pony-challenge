@@ -117,10 +117,8 @@ export enum RainbowType {
 	EAST_TO_SOUTH = 'EAST_TO_SOUTH',
 	SOUTH_TO_WEST = 'SOUTH_TO_WEST',
 	WEST_TO_NORTH = 'WEST_TO_NORTH',
-	NORTH_RED_TO_LEFT = 'NORTH_RED_TO_LEFT',
-	NORTH_RED_TO_RIHGT = 'NORTH_RED_TO_RIGHT',
-	WEST_RED_TO_TOP = 'WEST_RED_TO_TOP',
-	WEST_RED_TO_BOTTOM = 'WEST_RED_TO_BOTTOM',
+	HORIZONTAL = 'HORIZONTAL',
+	VERTICAL = 'VERTICAL',
 	NONE = 'NONE'
 }
 export type RainbowPosition = { x: number; y: number; direction: Direction };

@@ -17,10 +17,10 @@ interface Props {
 const onMove = (moveF: typeof move) => (
 	gameState: GameState,
 	setPath: React.Dispatch<React.SetStateAction<RainbowPath>>
-) => (e: React.KeyboardEvent) => {
+) => async (e: React.KeyboardEvent) => {
 	const direction = keyCodeToDirection(e.keyCode);
 	if (direction) {
-		moveF(direction);
+		await moveF(direction);
 
 		const { x, y } = gameState.charactersPosition.get(Role.PONY)!;
 		setPath(prev => prev.slice(-1).concat({ x, y, direction }) as RainbowPath);

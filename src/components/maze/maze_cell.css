@@ -118,22 +118,68 @@
 	}
 }
 
-.rainbow_image_plain {
+.rainbow_horizontal {
 	width: 60px;
-	height: 30px;
+	height: 54px;
 	position: absolute;
+	top: -55%;
+	left: -73%;
 	animation: rainbow_plain 0.7s step-end infinite;
-	top: -3px;
-	left: -70%;
+	transform: scaleX(0.4166) scaleY(0.2);
 	z-index: 0;
 }
 
-.rainbow_image_connection {
-	width: 90px;
-	height: 90px;
+.rainbow_vertical {
+	width: 60px;
+	height: 54px;
+	position: absolute;
+	top: -55%;
+	left: -73%;
+	animation: rainbow_plain 0.7s step-end infinite;
+	transform: rotate(90deg) scaleX(0.4166) scaleY(0.2);
+	z-index: 0;
+}
+
+.rainbow_north_to_east {
+	width: 115px;
+	height: 115px;
+	top: -150%;
+	left: -156%;
 	position: absolute;
 	animation: rainbow_connection 0.7s step-end infinite;
-	top: -100%;
-	left: -100%;
+	transform: scale(0.2173);
+	z-index: 0;
+}
+
+.rainbow_east_to_south {
+	width: 115px;
+	height: 115px;
+	top: -150%;
+	left: -210%;
+	position: absolute;
+	animation: rainbow_connection 0.7s step-end infinite;
+	transform: rotate(90deg) scale(0.2173);
+	z-index: 0;
+}
+
+.rainbow_south_to_west {
+	width: 115px;
+	height: 115px;
+	top: -205%;
+	left: -210%;
+	position: absolute;
+	animation: rainbow_connection 0.7s step-end infinite;
+	transform: rotate(180deg) scale(0.2173);
+	z-index: 0;
+}
+
+.rainbow_west_to_north {
+	width: 115px;
+	height: 115px;
+	position: absolute;
+	top: -205%;
+	left: -158%;
+	animation: rainbow_connection 0.7s step-end infinite;
+	transform: rotate(270deg) scale(0.2173);
 	z-index: 0;
 }

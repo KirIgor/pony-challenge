@@ -12,6 +12,46 @@ import {
 
 // border connections
 
+export const hasSide = (
+	blueprint: Blueprint,
+	x: number,
+	y: number,
+	width: number,
+	height: number,
+	side: Side
+): boolean => {
+	switch (side) {
+		case Side.LEFT: {
+			if (x == 0) return true;
+			return (
+				(blueprint.getIn([y, x, 'sides']) & Side.LEFT) != 0 ||
+				(blueprint.getIn([y, x - 1, 'sides']) & Side.RIGHT) != 0
+			);
+		}
+		case Side.RIGHT: {
+			if (x == width - 1) return true;
+			return (
+				(blueprint.getIn([y, x, 'sides']) & Side.RIGHT) != 0 ||
+				(blueprint.getIn([y, x + 1, 'sides']) & Side.LEFT) != 0
+			);
+		}
+		case Side.TOP: {
+			if (y == 0) return true;
+			return (
+				(blueprint.getIn([y, x, 'sides']) & Side.TOP) != 0 ||
+				(blueprint.getIn([y - 1, x, 'sides']) & Side.BOTTOM) != 0
+			);
+		}
+		case Side.BOTTOM: {
+			if (y == height - 1) return true;
+			return (
+				(blueprint.getIn([y, x, 'sides']) & Side.BOTTOM) != 0 ||
+				(blueprint.getIn([y + 1, x, 'sides']) & Side.TOP) != 0
+			);
+		}
+	}
+};
+
 const isBorderConnectionTopLeft = (
 	blueprint: Blueprint,
 	x: number,
@@ -19,15 +59,12 @@ const isBorderConnectionTopLeft = (
 	width: number,
 	height: number
 ): boolean => {
+	if (x == 0 || y == 0) return false;
 	return (
-		((blueprint.getIn([y, x, 'sides']) & Side.TOP) != 0 ||
-			(blueprint.getIn([Math.max(y - 1, 0), x, 'sides']) & Side.BOTTOM) != 0) &&
-		((blueprint.getIn([y, x, 'sides']) & Side.LEFT) != 0 ||
-			(blueprint.getIn([y, Math.max(x - 1, 0), 'sides']) & Side.RIGHT) != 0) &&
-		(blueprint.getIn([Math.max(y - 1, 0), Math.max(x - 1, 0), 'sides']) & Side.RIGHT) == 0 &&
-		(blueprint.getIn([Math.max(y - 1, 0), Math.max(x - 1, 0), 'sides']) & Side.BOTTOM) == 0 &&
-		(blueprint.getIn([Math.max(y - 1, 0), x, 'sides']) & Side.LEFT) == 0 &&
-		(blueprint.getIn([y, Math.max(x - 1, 0), 'sides']) & Side.TOP) == 0
+		hasSide(blueprint, x, y, width, height, Side.TOP) &&
+		hasSide(blueprint, x, y, width, height, Side.LEFT) &&
+		!hasSide(blueprint, x - 1, y, width, height, Side.TOP) &&
+		!hasSide(blueprint, x, y - 1, width, height, Side.LEFT)
 	);
 };
 
@@ -38,16 +75,12 @@ const isBorderConnectionTopRight = (
 	width: number,
 	height: number
 ): boolean => {
+	if (x == width - 1 || y == 0) return false;
 	return (
-		((blueprint.getIn([y, x, 'sides']) & Side.TOP) != 0 ||
-			(blueprint.getIn([Math.max(y - 1, 0), x, 'sides']) & Side.BOTTOM) != 0) &&
-		((blueprint.getIn([y, x, 'sides']) & Side.RIGHT) != 0 ||
-			(blueprint.getIn([y, Math.min(x + 1, width - 1), 'sides']) & Side.LEFT) != 0) &&
-		(blueprint.getIn([Math.max(y - 1, 0), Math.min(x + 1, width - 1), 'sides']) & Side.LEFT) == 0 &&
-		(blueprint.getIn([Math.max(y - 1, 0), Math.min(x + 1, width - 1), 'sides']) & Side.BOTTOM) ==
-			0 &&
-		(blueprint.getIn([Math.max(y - 1, 0), x, 'sides']) & Side.RIGHT) == 0 &&
-		(blueprint.getIn([y, Math.min(x + 1, width - 1), 'sides']) & Side.TOP) == 0
+		hasSide(blueprint, x, y, width, height, Side.TOP) &&
+		hasSide(blueprint, x, y, width, height, Side.RIGHT) &&
+		!hasSide(blueprint, x + 1, y, width, height, Side.TOP) &&
+		!hasSide(blueprint, x, y - 1, width, height, Side.RIGHT)
 	);
 };
 
@@ -58,16 +91,12 @@ const isBorderConnectionBottomLeft = (
 	width: number,
 	height: number
 ): boolean => {
+	if (x == 0 || y == height - 1) return false;
 	return (
-		((blueprint.getIn([y, x, 'sides']) & Side.BOTTOM) != 0 ||
-			(blueprint.getIn([Math.min(y + 1, height - 1), x, 'sides']) & Side.TOP) != 0) &&
-		((blueprint.getIn([y, x, 'sides']) & Side.LEFT) != 0 ||
-			(blueprint.getIn([y, Math.max(x - 1, 0), 'sides']) & Side.RIGHT) != 0) &&
-		(blueprint.getIn([Math.min(y + 1, height - 1), Math.max(x - 1, 0), 'sides']) & Side.RIGHT) ==
-			0 &&
-		(blueprint.getIn([Math.min(y + 1, height - 1), Math.max(x - 1, 0), 'sides']) & Side.TOP) == 0 &&
-		(blueprint.getIn([Math.min(y + 1, height - 1), x, 'sides']) & Side.LEFT) == 0 &&
-		(blueprint.getIn([y, Math.max(x - 1, 0), 'sides']) & Side.BOTTOM) == 0
+		hasSide(blueprint, x, y, width, height, Side.BOTTOM) &&
+		hasSide(blueprint, x, y, width, height, Side.LEFT) &&
+		!hasSide(blueprint, x - 1, y, width, height, Side.BOTTOM) &&
+		!hasSide(blueprint, x, y + 1, width, height, Side.LEFT)
 	);
 };
 
@@ -78,19 +107,12 @@ const isBorderConnectionBottomRight = (
 	width: number,
 	height: number
 ): boolean => {
+	if (x == width - 1 || y == height - 1) return false;
 	return (
-		((blueprint.getIn([y, x, 'sides']) & Side.BOTTOM) != 0 ||
-			(blueprint.getIn([Math.min(y + 1, height - 1), x, 'sides']) & Side.TOP) != 0) &&
-		((blueprint.getIn([y, x, 'sides']) & Side.RIGHT) != 0 ||
-			(blueprint.getIn([y, Math.min(x + 1, width - 1), 'sides']) & Side.LEFT) != 0) &&
-		(blueprint.getIn([Math.min(y + 1, height - 1), Math.min(x + 1, width - 1), 'sides']) &
-			Side.LEFT) ==
-			0 &&
-		(blueprint.getIn([Math.min(y + 1, height - 1), Math.min(x + 1, width - 1), 'sides']) &
-			Side.TOP) ==
-			0 &&
-		(blueprint.getIn([Math.min(y + 1, height - 1, x), 'sides']) & Side.RIGHT) == 0 &&
-		(blueprint.getIn([y, Math.min(x + 1, width - 1), 'sides']) & Side.BOTTOM) == 0
+		hasSide(blueprint, x, y, width, height, Side.BOTTOM) &&
+		hasSide(blueprint, x, y, width, height, Side.RIGHT) &&
+		!hasSide(blueprint, x + 1, y, width, height, Side.BOTTOM) &&
+		!hasSide(blueprint, x, y + 1, width, height, Side.RIGHT)
 	);
 };
 
@@ -130,11 +152,11 @@ export const getRainbowType = (rainbowPath: RainbowPath, x: number, y: number): 
 		switch (rainbowPath[0].direction) {
 			case Direction.WEST:
 			case Direction.EAST: {
-				return RainbowType.WEST_RED_TO_TOP;
+				return RainbowType.HORIZONTAL;
 			}
 			case Direction.NORTH:
 			case Direction.SOUTH: {
-				return RainbowType.NORTH_RED_TO_LEFT;
+				return RainbowType.VERTICAL;
 			}
 		}
 	}
@@ -142,42 +164,40 @@ export const getRainbowType = (rainbowPath: RainbowPath, x: number, y: number): 
 		const prev: RainbowPosition = rainbowPath[0];
 		const next: RainbowPosition = rainbowPath[1];
 
+		if (prev.x == x && prev.y == y)
+			return getRainbowType(rainbowPath.slice(0, 1) as RainbowPath, x, y);
+		if (next.x != x || next.y != y) return RainbowType.NONE;
+
 		if (
 			(prev.direction == Direction.NORTH && next.direction == Direction.NORTH) ||
 			(prev.direction == Direction.SOUTH && next.direction == Direction.SOUTH)
 		) {
-			if ((prev.x == x && prev.y == y) || (next.x == x && next.y == y))
-				return RainbowType.NORTH_RED_TO_LEFT;
+			return RainbowType.VERTICAL;
 		} else if (
 			(prev.direction == Direction.WEST && next.direction == Direction.WEST) ||
 			(prev.direction == Direction.EAST && next.direction == Direction.EAST)
 		) {
-			if ((prev.x == x && prev.y == y) || (next.x == x && next.y == y))
-				return RainbowType.WEST_RED_TO_TOP;
-		} else if (prev.direction == Direction.NORTH && next.direction == Direction.EAST) {
-			if (prev.x == x && prev.y == y) return RainbowType.NORTH_RED_TO_LEFT;
-			if (next.x == x && next.y == y) return RainbowType.NORTH_TO_EAST;
-		} else if (prev.direction == Direction.WEST && next.direction == Direction.SOUTH) {
-			if (prev.x == x && prev.y == y) return RainbowType.WEST_RED_TO_TOP;
-			if (next.x == x && next.y == y) return RainbowType.NORTH_TO_EAST;
-		} else if (prev.direction == Direction.EAST && next.direction == Direction.SOUTH) {
-			if (prev.x == x && prev.y == y) return RainbowType.WEST_RED_TO_TOP;
-			if (next.x == x && next.y == y) return RainbowType.EAST_TO_SOUTH;
-		} else if (prev.direction == Direction.NORTH && next.direction == Direction.WEST) {
-			if (prev.x == x && prev.y == y) return RainbowType.NORTH_RED_TO_RIHGT;
-			if (next.x == x && next.y == y) return RainbowType.EAST_TO_SOUTH;
-		} else if (prev.direction == Direction.SOUTH && next.direction == Direction.WEST) {
-			if (prev.x == x && prev.y == y) return RainbowType.NORTH_RED_TO_RIHGT;
-			if (next.x == x && next.y == y) return RainbowType.SOUTH_TO_WEST;
-		} else if (prev.direction == Direction.EAST && next.direction == Direction.NORTH) {
-			if (prev.x == x && prev.y == y) return RainbowType.WEST_RED_TO_BOTTOM;
-			if (next.x == x && next.y == y) return RainbowType.SOUTH_TO_WEST;
-		} else if (prev.direction == Direction.WEST && next.direction == Direction.NORTH) {
-			if (prev.x == x && prev.y == y) return RainbowType.WEST_RED_TO_BOTTOM;
-			if (next.x == x && next.y == y) return RainbowType.WEST_TO_NORTH;
-		} else if (prev.direction == Direction.SOUTH && next.direction == Direction.EAST) {
-			if (prev.x == x && prev.y == y) return RainbowType.NORTH_RED_TO_LEFT;
-			if (next.x == x && next.y == y) return RainbowType.WEST_TO_NORTH;
+			return RainbowType.HORIZONTAL;
+		} else if (
+			(prev.direction == Direction.NORTH && next.direction == Direction.EAST) ||
+			(prev.direction == Direction.WEST && next.direction == Direction.SOUTH)
+		) {
+			return RainbowType.NORTH_TO_EAST;
+		} else if (
+			(prev.direction == Direction.EAST && next.direction == Direction.SOUTH) ||
+			(prev.direction == Direction.NORTH && next.direction == Direction.WEST)
+		) {
+			return RainbowType.EAST_TO_SOUTH;
+		} else if (
+			(prev.direction == Direction.SOUTH && next.direction == Direction.WEST) ||
+			(prev.direction == Direction.EAST && next.direction == Direction.NORTH)
+		) {
+			return RainbowType.SOUTH_TO_WEST;
+		} else if (
+			(prev.direction == Direction.WEST && next.direction == Direction.NORTH) ||
+			(prev.direction == Direction.SOUTH && next.direction == Direction.EAST)
+		) {
+			return RainbowType.WEST_TO_NORTH;
 		}
 	}
 	return RainbowType.NONE;

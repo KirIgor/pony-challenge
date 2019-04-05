@@ -1,36 +1,40 @@
 import * as React from 'react';
 import * as enzyme from 'enzyme';
 
-import { range } from '../../utils/helper';
-import { Role, PonyName, RainbowType } from '../../types/index';
+import { Role, PonyName, RainbowType, Side, BorderConnection } from '../../types/index';
 import MazeCell from './maze_cell';
 
+const mazeCell = enzyme.shallow(
+	<MazeCell
+		sides={Side.TOP | Side.LEFT | Side.RIGHT}
+		role={Role.NONE}
+		ponyName={PonyName.APPLEJACK}
+		borderConnections={BorderConnection.TOP_LEFT | BorderConnection.BOTTOM_RIGHT}
+		rainbowType={RainbowType.NORTH_TO_EAST}
+	/>
+);
+
 describe('maze cell', () => {
-	it('renders correct sides', () => {
-		const mapping = {
-			1: 'left',
-			2: 'right',
-			4: 'top',
-			8: 'bottom'
-		};
+	it('should render left, right and top side correctly', () => {
+		expect(mazeCell.find('.left').length).toBe(1);
+		expect(mazeCell.find('.right').length).toBe(1);
+		expect(mazeCell.find('.top').length).toBe(1);
+		expect(mazeCell.find('.bottom').length).toBe(0);
+	});
 
-		const shouldContain = (i: number, side: number) => i & side;
+	it('should render border connection top_left and bottom_right correctly', () => {
+		expect(mazeCell.find('.top_left').length).toBe(1);
+		expect(mazeCell.find('.top_right').length).toBe(0);
+		expect(mazeCell.find('.bottom_right').length).toBe(1);
+		expect(mazeCell.find('.bottom_left').length).toBe(0);
+	});
 
-		range(15).forEach(i => {
-			const mazeCell = enzyme.shallow(
-				<MazeCell
-					sides={i}
-					role={Role.NONE}
-					ponyName={PonyName.APPLEJACK}
-					borderConnections={0}
-					rainbowType={RainbowType.NONE}
-				/>
-			);
-			const className = mazeCell.find('.cell').getElement().props.className;
-
-			[1, 2, 4, 8].forEach(side => {
-				if (shouldContain(i, side)) expect(className).toMatch(mapping[side]);
-			});
-		});
+	it('should render rainbow north_to_east type correctly', () => {
+		expect(mazeCell.find('.rainbow_horizontal').length).toBe(0);
+		expect(mazeCell.find('.rainbow_vertical').length).toBe(0);
+		expect(mazeCell.find('.rainbow_north_to_east').length).toBe(1);
+		expect(mazeCell.find('.rainbow_east_to_south').length).toBe(0);
+		expect(mazeCell.find('.rainbow_south_to_west').length).toBe(0);
+		expect(mazeCell.find('.rainbow_west_to_north').length).toBe(0);
 	});
 });

@@ -49,69 +49,23 @@ const renderBorderConnections = (borderConnections: number) => {
 
 const renderRainbow = (rainbowType: RainbowType) => {
 	switch (rainbowType) {
-		case RainbowType.WEST_RED_TO_TOP: {
-			return (
-				<div
-					className="rainbow_image_plain"
-					style={{ transform: 'scaleX(0.45) scaleY(0.3)', left: '-60%' }}
-				/>
-			);
+		case RainbowType.HORIZONTAL: {
+			return <div className="rainbow_horizontal" />;
 		}
-		case RainbowType.WEST_RED_TO_BOTTOM: {
-			return (
-				<div
-					className="rainbow_image_plain"
-					style={{ transform: 'scaleX(0.45) scaleY(-0.3)', left: '-60%' }}
-				/>
-			);
-		}
-		case RainbowType.NORTH_RED_TO_LEFT: {
-			return (
-				<div
-					className="rainbow_image_plain"
-					style={{ transform: 'rotate(90deg) scaleX(0.5) scaleY(-0.3)', top: '0' }}
-				/>
-			);
-		}
-		case RainbowType.NORTH_RED_TO_RIHGT: {
-			return (
-				<div
-					className="rainbow_image_plain"
-					style={{ transform: 'rotate(90deg) scaleX(0.5) scaleY(0.3)', top: '0' }}
-				/>
-			);
+		case RainbowType.VERTICAL: {
+			return <div className="rainbow_vertical" />;
 		}
 		case RainbowType.NORTH_TO_EAST: {
-			return (
-				<div
-					className="rainbow_image_connection"
-					style={{ transform: 'scale(0.277)', left: '-95%' }}
-				/>
-			);
+			return <div className="rainbow_north_to_east" />;
 		}
 		case RainbowType.EAST_TO_SOUTH: {
-			return (
-				<div
-					className="rainbow_image_connection"
-					style={{ transform: 'rotate(90deg) scale(0.277)', left: '-162%' }}
-				/>
-			);
+			return <div className="rainbow_east_to_south" />;
 		}
 		case RainbowType.SOUTH_TO_WEST: {
-			return (
-				<div
-					className="rainbow_image_connection"
-					style={{ transform: 'rotate(180deg) scale(0.277)', top: '-166%', left: '-160%' }}
-				/>
-			);
+			return <div className="rainbow_south_to_west" />;
 		}
 		case RainbowType.WEST_TO_NORTH: {
-			return (
-				<div
-					className="rainbow_image_connection"
-					style={{ transform: 'rotate(270deg) scale(0.277)', top: '-166%', left: '-95%' }}
-				/>
-			);
+			return <div className="rainbow_west_to_north" />;
 		}
 		case RainbowType.NONE: {
 			return null;
