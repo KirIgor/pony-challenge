@@ -130,3 +130,8 @@ export enum BorderConnection {
 	BOTTOM_LEFT = 4,
 	BOTTOM_RIGHT = 8
 }
+
+export enum GameStatus {
+	WIN = 'WIN',
+	LOSE = 'LOSE'
+}

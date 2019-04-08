@@ -16,9 +16,13 @@ interface Props {
 }
 
 const onMove = (moveF: typeof move) => (
-	gameState: GameState,
-	setPath: React.Dispatch<React.SetStateAction<RainbowPath>>
-) => async (e: React.KeyboardEvent) => {
+	isMoving: boolean,
+	setMoving: React.Dispatch<React.SetStateAction<boolean>>
+) => (gameState: GameState, setPath: React.Dispatch<React.SetStateAction<RainbowPath>>) => async (
+	e: React.KeyboardEvent
+) => {
+	if (isMoving) return;
+
 	const direction = keyCodeToDirection(e.keyCode);
 	if (!direction) return;
 
@@ -29,7 +33,9 @@ const onMove = (moveF: typeof move) => (
 	const height = gameState.height;
 
 	if (!hasSide(gameState.blueprint, x, y, width, height, side)) {
+		setMoving(true);
 		await moveF(direction);
+		setMoving(false);
 
 		setPath(prev => prev.slice(-1).concat({ x, y, direction }) as RainbowPath);
 	}
@@ -41,12 +47,13 @@ const Game = React.memo(({ gameState, init, move }: Props) => {
 	}, []);
 
 	const [rainbowPath, setPath] = React.useState<RainbowPath>([]);
+	const [isMoving, setMoving] = React.useState<boolean>(false);
 
 	return (
 		<div
 			ref={node => node && node.focus()}
 			tabIndex={0}
-			onKeyDown={onMove(move)(gameState, setPath)}>
+			onKeyDown={onMove(move)(isMoving, setMoving)(gameState, setPath)}>
 			<Maze gameState={gameState} ponyName={PonyName.APPLEJACK} rainbowPath={rainbowPath} />
 		</div>
 	);
