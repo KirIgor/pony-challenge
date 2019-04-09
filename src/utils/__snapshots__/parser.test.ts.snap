@@ -51,6 +51,7 @@ Object {
         "y": 2,
       },
 },
+  "gameStatus": "ACTIVE",
   "height": 3,
   "mazeId": "c6d8aefa-23fb-42a3-8eeb-347ab807de0d",
   "width": 3,

@@ -725,6 +725,7 @@ Object {
                 "y": 14,
               },
 },
+      "gameStatus": "ACTIVE",
       "height": 15,
       "mazeId": "c6d8aefa-23fb-42a3-8eeb-347ab807de0d",
       "width": 15,

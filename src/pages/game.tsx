@@ -18,13 +18,14 @@ type Props = ReturnType<typeof mapDispatchToProps> & {
 	height: number;
 	ponyName: PonyName;
 	difficulty: number;
+	history: any;
 };
 
-const Game = React.memo(({ width, height, ponyName, difficulty, init }: Props) => {
+const Game = React.memo(({ width, height, ponyName, difficulty, history, init }: Props) => {
 	return (
 		<div className="game-container">
 			<Loadable load={init(width, height, ponyName, difficulty)}>
-				<GameComponent ponyName={ponyName} />
+				<GameComponent ponyName={ponyName} newGameFunction={() => history.goBack(1)} />
 			</Loadable>
 		</div>
 	);

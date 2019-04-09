@@ -1,2 +1,7 @@
 .game-container {
+	width: 100%;
+	height: -webkit-fill-available;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

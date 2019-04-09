@@ -9,7 +9,8 @@ import {
 	Side,
 	Position,
 	Role,
-	Point
+	Point,
+	GameStatus
 } from '../types/index';
 import { range } from './helper';
 import { Map as iMap } from 'immutable';
@@ -59,16 +60,28 @@ export const parseCharactersPosition = ({
 }: APIState): CharactersPosition =>
 	iMap<Role, Point>().withMutations(map =>
 		map
-			.set(Role.PONY, parsePosition(pony, width))
-			.set(Role.DOMOKUN, parsePosition(domokun, width))
-			.set(Role.EXIT, parsePosition(exit, width))
+			.set(Role.PONY, parsePosition(pony as [number], width))
+			.set(Role.DOMOKUN, parsePosition(domokun as [number], width))
+			.set(Role.EXIT, parsePosition(exit as [number], width))
 	);
+
+export const parseGameStatus = (state: APIState): GameStatus => {
+	switch (state['game-state'].state) {
+		case 'won':
+			return GameStatus.WIN;
+		case 'over':
+			return GameStatus.LOSE;
+		default:
+			return GameStatus.ACTIVE;
+	}
+};
 
 export const parseGameState = (state: APIState): GameState =>
 	new GameState({
 		mazeId: state.maze_id,
 		width: state.size[0],
 		height: state.size[1],
+		gameStatus: parseGameStatus(state),
 		charactersPosition: parseCharactersPosition(state),
 		blueprint: parseBlueprint(state)
 	});

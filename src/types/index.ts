@@ -1,6 +1,8 @@
 import { RecordFactory, StaticallyTypedRecord } from '../utils/immutable_helper';
 import { Map as iMap, List as iList } from 'immutable';
 
+import * as JSONState from '../api/mockapi/state.json';
+
 export enum Role {
 	PONY = 'pony',
 	DOMOKUN = 'domokun',
@@ -70,10 +72,17 @@ export class BlueprintRecord extends blueprintRecord
 
 export type Blueprint = iList<iList<BlueprintRecord>>;
 
+export enum GameStatus {
+	WIN = 'WIN',
+	LOSE = 'LOSE',
+	ACTIVE = 'ACTIVE'
+}
+
 interface IGameState {
 	mazeId: string;
 	width: number;
 	height: number;
+	gameStatus: GameStatus;
 	charactersPosition: CharactersPosition;
 	blueprint: Blueprint;
 }
@@ -82,6 +91,7 @@ const gameState = RecordFactory<IGameState>({
 	mazeId: '',
 	width: 0,
 	height: 0,
+	gameStatus: GameStatus.ACTIVE,
 	charactersPosition: iMap<Role, Point>(),
 	blueprint: iList<iList<BlueprintRecord>>()
 });
@@ -90,6 +100,7 @@ export class GameState extends gameState implements IGameState, StaticallyTypedR
 	mazeId: string;
 	width: number;
 	height: number;
+	gameStatus: GameStatus;
 	charactersPosition: CharactersPosition;
 	blueprint: Blueprint;
 	constructor(props: IGameState) {
@@ -98,19 +109,7 @@ export class GameState extends gameState implements IGameState, StaticallyTypedR
 }
 
 export type Position = [number];
-export interface APIState {
-	pony: Position;
-	domokun: Position;
-	'end-point': Position;
-	size: [number, number];
-	difficulty: number;
-	data: string[][];
-	maze_id: string;
-	'game-state': {
-		state: string;
-		'state-result': string;
-	};
-}
+export type APIState = typeof JSONState;
 
 export enum RainbowType {
 	NORTH_TO_EAST = 'NORTH_TO_EAST',
@@ -129,9 +128,4 @@ export enum BorderConnection {
 	TOP_RIGHT = 2,
 	BOTTOM_LEFT = 4,
 	BOTTOM_RIGHT = 8
-}
-
-export enum GameStatus {
-	WIN = 'WIN',
-	LOSE = 'LOSE'
 }

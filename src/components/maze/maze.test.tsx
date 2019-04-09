@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as enzyme from 'enzyme';
 import { Map as iMap, List as iList } from 'immutable';
 
-import { GameState, Role, Point, BlueprintRecord, PonyName } from '../../types/index';
+import { GameState, Role, Point, BlueprintRecord, PonyName, GameStatus } from '../../types/index';
 import Maze from './maze';
 
 const width = 3;
@@ -11,6 +11,7 @@ const testState = new GameState({
 	mazeId: '',
 	width,
 	height,
+	gameStatus: GameStatus.ACTIVE,
 	charactersPosition: iMap<Role, Point>(),
 	blueprint: iList<iList<BlueprintRecord>>().withMutations(state =>
 		state

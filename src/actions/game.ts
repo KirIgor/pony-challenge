@@ -1,14 +1,14 @@
 import { Dispatch, ActionCreator } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
-import { Direction, GameState, CharactersPosition, PonyName } from '../types/index';
+import { Direction, GameState, CharactersPosition, PonyName, GameStatus } from '../types/index';
 import { StoreState } from '../store/store';
 import { ponyAPI } from '../App';
-import { parseCharactersPosition, parseGameState } from '../utils/parser';
+import { parseCharactersPosition, parseGameState, parseGameStatus } from '../utils/parser';
 
 // action types
-export const UPDATE_CHARACTERS_POSITION = 'UPDATE_CHARACTERS_POSITION';
-export type UPDATE_CHARACTERS_POSITION = typeof UPDATE_CHARACTERS_POSITION;
+export const UPDATE_STATE = 'UPDATE_STATE';
+export type UPDATE_STATE = typeof UPDATE_STATE;
 
 export const INIT_STATE = 'INIT_STATE';
 export type INIT_STATE = typeof INIT_STATE;
@@ -16,8 +16,8 @@ export type INIT_STATE = typeof INIT_STATE;
 // actions
 
 export interface MoveAction {
-	type: UPDATE_CHARACTERS_POSITION;
-	payload: { charactersPosition: CharactersPosition };
+	type: UPDATE_STATE;
+	payload: { charactersPosition: CharactersPosition; gameStatus: GameStatus };
 }
 
 export interface InitAction {
@@ -39,8 +39,11 @@ export const move: ActionCreator<ThunkAction<Promise<void>, StoreState, void, In
 	const apiState = await ponyAPI.getState(mazeId);
 
 	dispatch({
-		type: UPDATE_CHARACTERS_POSITION,
-		payload: { charactersPosition: parseCharactersPosition(apiState) }
+		type: UPDATE_STATE,
+		payload: {
+			charactersPosition: parseCharactersPosition(apiState),
+			gameStatus: parseGameStatus(apiState)
+		}
 	});
 };
 

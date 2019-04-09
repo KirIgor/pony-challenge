@@ -8,11 +8,13 @@ import { hasSide } from '../maze/maze_helper';
 import { StoreState } from '../../store/store';
 import { GameState } from '../../types/index';
 import Maze from '../maze/maze';
+import GameEndModal from './game_end_modal';
 
 interface Props {
 	ponyName: PonyName;
 	gameState: GameState;
 	move: typeof move;
+	newGameFunction: () => any;
 }
 
 const onMove = (moveF: typeof move) => (
@@ -41,15 +43,16 @@ const onMove = (moveF: typeof move) => (
 	}
 };
 
-const Game = React.memo(({ gameState, ponyName, move }: Props) => {
+const Game = React.memo(({ gameState, ponyName, move, newGameFunction }: Props) => {
 	const [rainbowPath, setPath] = React.useState<RainbowPath>([]);
-	const [isMoving, setMoving] = React.useState<boolean>(false);
+	const [isMoving, setMoving] = React.useState(false);
 
 	return (
 		<div
 			ref={node => node && node.focus()}
 			tabIndex={0}
 			onKeyDown={onMove(move)(isMoving, setMoving)(gameState, setPath)}>
+			<GameEndModal gameStatus={gameState.gameStatus} newGameFunction={newGameFunction} />
 			<Maze gameState={gameState} ponyName={ponyName} rainbowPath={rainbowPath} />
 		</div>
 	);
