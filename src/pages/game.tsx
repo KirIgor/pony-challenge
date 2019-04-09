@@ -4,6 +4,7 @@ import { ThunkDispatch } from 'redux-thunk';
 // import { Link } from 'react-router-dom';
 // import * as Routes from '../constants/routes.json';
 
+import { parseQuery } from '../utils/helper';
 import { PonyName } from '../types/index';
 import { StoreState } from '../store/store';
 import Loadable from '../components/loadable/loadable';
@@ -12,17 +13,33 @@ import GameComponent from '../components/game/game';
 
 import './game.css';
 
-type Props = ReturnType<typeof mapDispatchToProps> & {};
+type Props = ReturnType<typeof mapDispatchToProps> & {
+	width: number;
+	height: number;
+	ponyName: PonyName;
+	difficulty: number;
+};
 
-const Game = React.memo(({ init }: Props) => {
+const Game = React.memo(({ width, height, ponyName, difficulty, init }: Props) => {
 	return (
 		<div className="game-container">
-			<Loadable load={init(15, 15, PonyName.APPLEJACK, 7)}>
-				<GameComponent />
+			<Loadable load={init(width, height, ponyName, difficulty)}>
+				<GameComponent ponyName={ponyName} />
 			</Loadable>
 		</div>
 	);
 });
+
+const mapStateToProps = (_: any, own: any) => {
+	const query = parseQuery(own.location.search) as any;
+
+	return {
+		width: parseInt(query.width),
+		height: parseInt(query.height),
+		ponyName: query.ponyName,
+		difficulty: parseInt(query.difficulty)
+	};
+};
 
 // in lack of redux-thunk pull request #224
 const mapDispatchToProps = (dispatch: ThunkDispatch<StoreState, void, GameAction>) => ({
@@ -31,6 +48,6 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<StoreState, void, GameAction
 });
 
 export default connect(
-	null,
+	mapStateToProps,
 	mapDispatchToProps
 )(Game);

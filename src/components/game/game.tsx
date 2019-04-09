@@ -10,6 +10,7 @@ import { GameState } from '../../types/index';
 import Maze from '../maze/maze';
 
 interface Props {
+	ponyName: PonyName;
 	gameState: GameState;
 	move: typeof move;
 }
@@ -40,7 +41,7 @@ const onMove = (moveF: typeof move) => (
 	}
 };
 
-const Game = React.memo(({ gameState, move }: Props) => {
+const Game = React.memo(({ gameState, ponyName, move }: Props) => {
 	const [rainbowPath, setPath] = React.useState<RainbowPath>([]);
 	const [isMoving, setMoving] = React.useState<boolean>(false);
 
@@ -49,7 +50,7 @@ const Game = React.memo(({ gameState, move }: Props) => {
 			ref={node => node && node.focus()}
 			tabIndex={0}
 			onKeyDown={onMove(move)(isMoving, setMoving)(gameState, setPath)}>
-			<Maze gameState={gameState} ponyName={PonyName.APPLEJACK} rainbowPath={rainbowPath} />
+			<Maze gameState={gameState} ponyName={ponyName} rainbowPath={rainbowPath} />
 		</div>
 	);
 });

@@ -27,7 +27,7 @@ const CellRole = React.memo(({ ponyName, role = Role.NONE }: Props) => {
 });
 
 const getPonyImgSrc = (ponyName: PonyName) => {
-	return `/images/ponies/${ponyName.toLowerCase()}.png`;
+	return `/images/ponies/${ponyName.replace(/ /g, '_').toLowerCase()}.png`;
 };
 
 export default CellRole;

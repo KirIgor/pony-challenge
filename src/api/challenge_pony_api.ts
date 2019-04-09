@@ -9,7 +9,7 @@ const ChallengePonyAPI: PonyAPI = {
 		post(`${baseURL}/maze`, {
 			'maze-width': width,
 			'maze-height': height,
-			'maze-player-name': playerName.toString(),
+			'maze-player-name': playerName,
 			difficulty: difficulty
 		}) as Promise<NewGameResponse>,
 
