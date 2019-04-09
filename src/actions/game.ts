@@ -1,4 +1,5 @@
-import { Dispatch } from 'redux';
+import { Dispatch, ActionCreator } from 'redux';
+import { ThunkAction } from 'redux-thunk';
 
 import { Direction, GameState, CharactersPosition, PonyName } from '../types/index';
 import { StoreState } from '../store/store';
@@ -28,10 +29,9 @@ export type GameAction = MoveAction | InitAction;
 
 // action creators
 
-export const move = (direction: Direction) => async (
-	dispatch: Dispatch<MoveAction>,
-	getState: () => StoreState
-) => {
+export const move: ActionCreator<ThunkAction<Promise<void>, StoreState, void, InitAction>> = (
+	direction: Direction
+) => async (dispatch: Dispatch<MoveAction>, getState: () => StoreState) => {
 	const mazeId = getState().game.get('mazeId');
 	if (mazeId == '') throw Error('initialize game first');
 
@@ -44,7 +44,7 @@ export const move = (direction: Direction) => async (
 	});
 };
 
-export const init = (
+export const init: ActionCreator<ThunkAction<Promise<void>, StoreState, void, InitAction>> = (
 	width: number,
 	height: number,
 	playerName: PonyName,

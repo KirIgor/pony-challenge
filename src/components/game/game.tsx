@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 
 import { PonyName, Direction, RainbowPath, Role, Side } from '../../types/index';
-import { init, move } from '../../actions/game';
+import { move } from '../../actions/game';
 import { hasSide } from '../maze/maze_helper';
 import { StoreState } from '../../store/store';
 import { GameState } from '../../types/index';
@@ -11,7 +11,6 @@ import Maze from '../maze/maze';
 
 interface Props {
 	gameState: GameState;
-	init: typeof init;
 	move: typeof move;
 }
 
@@ -41,11 +40,7 @@ const onMove = (moveF: typeof move) => (
 	}
 };
 
-const Game = React.memo(({ gameState, init, move }: Props) => {
-	React.useEffect(() => {
-		init(15, 15, PonyName.APPLEJACK, 7);
-	}, []);
-
+const Game = React.memo(({ gameState, move }: Props) => {
 	const [rainbowPath, setPath] = React.useState<RainbowPath>([]);
 	const [isMoving, setMoving] = React.useState<boolean>(false);
 
@@ -92,10 +87,7 @@ const keyCodeToDirection = (keyCode: number): Direction | undefined => {
 };
 
 const mapStateToProps = (state: StoreState) => ({ gameState: state.game });
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-	init: bindActionCreators(init, dispatch),
-	move: bindActionCreators(move, dispatch)
-});
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({ move }, dispatch);
 
 export default connect(
 	mapStateToProps,

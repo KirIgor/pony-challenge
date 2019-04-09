@@ -1,6 +1,6 @@
 import * as React from 'react';
-// import { Link } from 'react-router-dom';
-// import * as Routes from '../constants/routes.json';
+import { Link } from 'react-router-dom';
+import * as Routes from '../constants/routes.json';
 
 import { PonyName } from '../types/index';
 import { range } from '../utils/helper';
@@ -30,7 +30,7 @@ const NewGame = React.memo(({  }: Props) => {
 				</div>
 				<div>{renderPonyNameSelect()}</div>
 				<div>difficulty: {renderDifficultySelect()}</div>
-				<button>New game</button>
+				<Link to={Routes.GAME}>Play</Link>
 			</div>
 		</div>
 	);
