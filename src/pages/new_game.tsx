@@ -55,6 +55,9 @@ const NewGame = React.memo(({  }: Props) => {
 	return (
 		<div className="new-game-container">
 			<Form>
+				<Form.Group as={Row} className="justify-content-center">
+					maze size
+				</Form.Group>
 				<Form.Group as={Row} className="align-items-center justify-content-center">
 					<Form.Group as={Col} md="auto">
 						{renderSizeSelect(setWidth)}
