@@ -1,11 +1,9 @@
-import { Dispatch } from 'redux';
-
 import { PonyName, Direction, GameState } from '../types/index';
 import { StoreState } from '../store/store';
 import { defaultGameState } from '../reducers/game';
 import { defaultStatisticState } from '../reducers/statistic';
 import { defaultMusicState } from '../reducers/music';
-import { init, move, GameAction } from './game';
+import { init, move } from './game';
 
 jest.mock('../App');
 
@@ -29,12 +27,6 @@ describe('game action creators', () => {
 	});
 
 	describe('move action creator', () => {
-		it('should throw error when maze id is empty string', () => {
-			expect(async () => {
-				await move(Direction.EAST)((() => {}) as Dispatch<GameAction>, getState);
-			}).toThrow;
-		});
-
 		it('should dispatch correct action', async () => {
 			const dispatchResults: any = [];
 			const dispatch = jest.fn(x => dispatchResults.push(x));

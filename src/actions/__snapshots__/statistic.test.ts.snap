@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`statistic action creators addLoses action creator should dispatch correct action 1`] = `
+Object {
+  "type": "ADD_LOSES",
+}
+`;
+
+exports[`statistic action creators addWins action creator should dispatch correct action 1`] = `
+Object {
+  "type": "ADD_WINS",
+}
+`;

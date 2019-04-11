@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`music action creators toggle action creator should dispatch correct action 1`] = `
+Object {
+  "type": "TOGGLE_MUSIC",
+}
+`;

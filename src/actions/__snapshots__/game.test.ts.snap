@@ -752,7 +752,8 @@ Object {
             "y": 14,
           },
 },
+    "gameStatus": "ACTIVE",
   },
-  "type": "UPDATE_CHARACTERS_POSITION",
+  "type": "UPDATE_STATE",
 }
 `;

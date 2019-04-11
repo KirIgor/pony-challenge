@@ -22,6 +22,7 @@
 	top: 25px;
 	right: 25px;
 	cursor: pointer;
+	overflow: hidden;
 }
 
 .music-image {
