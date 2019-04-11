@@ -129,3 +129,38 @@ export enum BorderConnection {
 	BOTTOM_LEFT = 4,
 	BOTTOM_RIGHT = 8
 }
+
+interface IStatistcState {
+	wins: number;
+	loses: number;
+}
+
+const statistcState = RecordFactory<IStatistcState>({
+	wins: 0,
+	loses: 0
+});
+
+export class StatistcState extends statistcState
+	implements IStatistcState, StaticallyTypedRecord<IStatistcState> {
+	wins: number;
+	loses: number;
+	constructor(props: IStatistcState) {
+		super(props);
+	}
+}
+
+interface IMusicState {
+	playing: boolean;
+}
+
+const musicState = RecordFactory<IMusicState>({
+	playing: true
+});
+
+export class MusicState extends musicState
+	implements IMusicState, StaticallyTypedRecord<IMusicState> {
+	playing: boolean;
+	constructor(props: IMusicState) {
+		super(props);
+	}
+}

@@ -5,3 +5,33 @@
 	justify-content: center;
 	align-items: center;
 }
+
+.back-btn-container {
+	position: fixed;
+	top: 25px;
+	left: 25px;
+	cursor: pointer;
+}
+
+.back-btn-image {
+	width: 100px;
+}
+
+.music-container {
+	position: fixed;
+	top: 25px;
+	right: 25px;
+	cursor: pointer;
+}
+
+.music-image {
+	width: 100px;
+}
+
+.cross-music-image {
+	position: absolute;
+	transform: rotate(45deg);
+	width: 200px;
+	top: -50px;
+	left: -35px;
+}

@@ -3,11 +3,17 @@ import { Dispatch } from 'redux';
 import { PonyName, Direction, GameState } from '../types/index';
 import { StoreState } from '../store/store';
 import { defaultGameState } from '../reducers/game';
+import { defaultStatisticState } from '../reducers/statistic';
+import { defaultMusicState } from '../reducers/music';
 import { init, move, GameAction } from './game';
 
 jest.mock('../App');
 
-const getState: () => StoreState = () => ({ game: defaultGameState });
+const getState: () => StoreState = () => ({
+	game: defaultGameState,
+	statistic: defaultStatisticState,
+	music: defaultMusicState
+});
 
 describe('game action creators', () => {
 	describe('init action creator', () => {
@@ -33,7 +39,11 @@ describe('game action creators', () => {
 			const dispatchResults: any = [];
 			const dispatch = jest.fn(x => dispatchResults.push(x));
 
-			const state = { game: defaultGameState };
+			const state = {
+				game: defaultGameState,
+				statistic: defaultStatisticState,
+				music: defaultMusicState
+			};
 			state.game = state.game.set('mazeId', 'test-id') as GameState;
 			const getState: () => StoreState = () => state;
 

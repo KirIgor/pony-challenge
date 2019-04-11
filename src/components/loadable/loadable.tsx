@@ -16,7 +16,10 @@ const Loadable = React.memo(({ load, children }: Props) => {
 
 	return isLoading ? (
 		<div className="spinner-container">
-			<img src="https://icongr.am/feather/refresh-cw.svg" className="spinner-image" />
+			<img
+				src="https://loading.io/spinners/azure/index.azure-round-loader.svg"
+				className="spinner-image"
+			/>
 		</div>
 	) : (
 		<React.Fragment>{children}</React.Fragment>

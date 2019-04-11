@@ -6,14 +6,17 @@ import { PonyName, Direction, RainbowPath, Role, Side } from '../../types/index'
 import { move } from '../../actions/game';
 import { hasSide } from '../maze/maze_helper';
 import { StoreState } from '../../store/store';
-import { GameState } from '../../types/index';
+import { GameState, GameStatus } from '../../types/index';
 import Maze from '../maze/maze';
 import GameEndModal from './game_end_modal';
+import { addWins, addLoses } from '../../actions/statistic';
 
 interface Props {
 	ponyName: PonyName;
 	gameState: GameState;
 	move: typeof move;
+	addWins: typeof addWins;
+	addLoses: typeof addLoses;
 	newGameFunction: () => any;
 }
 
@@ -21,7 +24,7 @@ const onMove = (moveF: typeof move) => (
 	isMoving: boolean,
 	setMoving: React.Dispatch<React.SetStateAction<boolean>>
 ) => (gameState: GameState, setPath: React.Dispatch<React.SetStateAction<RainbowPath>>) => async (
-	e: React.KeyboardEvent
+	e: any
 ) => {
 	if (isMoving) return;
 
@@ -43,20 +46,30 @@ const onMove = (moveF: typeof move) => (
 	}
 };
 
-const Game = React.memo(({ gameState, ponyName, move, newGameFunction }: Props) => {
-	const [rainbowPath, setPath] = React.useState<RainbowPath>([]);
-	const [isMoving, setMoving] = React.useState(false);
+const Game = React.memo(
+	({ gameState, ponyName, move, newGameFunction, addWins, addLoses }: Props) => {
+		const [rainbowPath, setPath] = React.useState<RainbowPath>([]);
+		const [isMoving, setMoving] = React.useState(false);
 
-	return (
-		<div
-			ref={node => node && node.focus()}
-			tabIndex={0}
-			onKeyDown={onMove(move)(isMoving, setMoving)(gameState, setPath)}>
-			<GameEndModal gameStatus={gameState.gameStatus} newGameFunction={newGameFunction} />
-			<Maze gameState={gameState} ponyName={ponyName} rainbowPath={rainbowPath} />
-		</div>
-	);
-});
+		React.useEffect(
+			() => {
+				if (gameState.gameStatus == GameStatus.WIN) addWins();
+				else if (gameState.gameStatus == GameStatus.LOSE) addLoses();
+			},
+			[gameState.gameStatus]
+		);
+
+		return (
+			<div
+				ref={node => node && node.focus()}
+				tabIndex={0}
+				onKeyDown={onMove(move)(isMoving, setMoving)(gameState, setPath)}>
+				<GameEndModal gameStatus={gameState.gameStatus} newGameFunction={newGameFunction} />
+				<Maze gameState={gameState} ponyName={ponyName} rainbowPath={rainbowPath} />
+			</div>
+		);
+	}
+);
 
 const directionToSide = (direction: Direction): Side => {
 	switch (direction) {
@@ -91,7 +104,8 @@ const keyCodeToDirection = (keyCode: number): Direction | undefined => {
 };
 
 const mapStateToProps = (state: StoreState) => ({ gameState: state.game });
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({ move }, dispatch);
+const mapDispatchToProps = (dispatch: Dispatch) =>
+	bindActionCreators({ move, addWins, addLoses }, dispatch);
 
 export default connect(
 	mapStateToProps,

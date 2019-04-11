@@ -30,6 +30,7 @@ export interface StaticallyTypedRecord<T> extends Constructable<T> {
 	): StaticallyTypedRecord<T>;
 	toJS(): { [key: string]: any };
 	toObject(): T;
+	update<K extends keyof T>(key: K, updater: (v: T[K]) => T[K]): StaticallyTypedRecord<T>;
 }
 
 export const RecordFactory = <T>(seed: T): new (...args: any[]) => StaticallyTypedRecord<T> =>

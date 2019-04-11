@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import * as Routes from '../constants/routes.json';
+import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 import './hello.css';
 
@@ -12,7 +13,9 @@ const Hello = React.memo(({  }: Props) => {
 			<div className="hello-items">
 				<div>Hello, %username%!</div>
 				<div>
-					<Link to={Routes.NEW_GAME}>Play</Link>
+					<Link className="link-style" to={Routes.NEW_GAME}>
+						<Button size="lg">Play</Button>
+					</Link>
 				</div>
 			</div>
 		</div>

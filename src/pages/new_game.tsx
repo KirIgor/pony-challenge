@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import * as Routes from '../constants/routes.json';
+import { Button, Form, Row, Col } from 'react-bootstrap';
 
 import { PonyName } from '../types/index';
 import { range } from '../utils/helper';
@@ -11,31 +12,37 @@ interface Props {}
 
 const renderSizeSelect = (onChange: (size: number) => any) => {
 	return (
-		<select
+		<Form.Control
+			size="lg"
+			as="select"
 			defaultValue="15"
-			onChange={(e: React.ChangeEvent<HTMLSelectElement>) => onChange(parseInt(e.target.value))}>
+			onChange={(e: any) => onChange(parseInt(e.target.value))}>
 			{range(11).map(i => <option key={i}>{i + 15}</option>)}
-		</select>
+		</Form.Control>
 	);
 };
 
 const renderPonyNameSelect = (onChange: (ponyName: PonyName) => any) => {
 	return (
-		<select
+		<Form.Control
+			size="lg"
+			as="select"
 			defaultValue={PonyName.APPLEJACK}
-			onChange={(e: React.ChangeEvent<HTMLSelectElement>) => onChange(e.target.value as PonyName)}>
+			onChange={(e: any) => onChange(e.target.value as PonyName)}>
 			{Object.values(PonyName).map(v => <option key={v}>{v}</option>)}
-		</select>
+		</Form.Control>
 	);
 };
 
 const renderDifficultySelect = (onChange: (difficulty: number) => any) => {
 	return (
-		<select
+		<Form.Control
+			size="lg"
+			as="select"
 			defaultValue="0"
-			onChange={(e: React.ChangeEvent<HTMLSelectElement>) => onChange(parseInt(e.target.value))}>
+			onChange={(e: any) => onChange(parseInt(e.target.value))}>
 			{range(11).map(i => <option key={i}>{i}</option>)}
-		</select>
+		</Form.Control>
 	);
 };
 
@@ -47,19 +54,33 @@ const NewGame = React.memo(({  }: Props) => {
 
 	return (
 		<div className="new-game-container">
-			<div className="new-game-items">
-				<div>
-					{renderSizeSelect(setWidth)}X{renderSizeSelect(setHeight)}
-				</div>
-				<div>{renderPonyNameSelect(setPonyName)}</div>
-				<div>difficulty: {renderDifficultySelect(setDifficulty)}</div>
-				<Link
-					to={`${
-						Routes.GAME
-					}?width=${width}&height=${height}&ponyName=${ponyName}&difficulty=${difficulty}`}>
-					Play
-				</Link>
-			</div>
+			<Form>
+				<Form.Group as={Row} className="align-items-center justify-content-center">
+					<Form.Group as={Col} md="auto">
+						{renderSizeSelect(setWidth)}
+					</Form.Group>
+					<Form.Group as={Col} md="auto">
+						X
+					</Form.Group>
+					<Form.Group as={Col} md="auto">
+						{renderSizeSelect(setHeight)}
+					</Form.Group>
+				</Form.Group>
+				<Form.Group>{renderPonyNameSelect(setPonyName)}</Form.Group>
+				<Form.Group as={Row} className="align-items-center justify-content-center">
+					<Form.Label column>difficulty</Form.Label>
+					<Col md="auto">{renderDifficultySelect(setDifficulty)}</Col>
+				</Form.Group>
+				<Form.Group as={Row} className="justify-content-center">
+					<Link
+						className="link-style"
+						to={`${
+							Routes.GAME
+						}?width=${width}&height=${height}&ponyName=${ponyName}&difficulty=${difficulty}`}>
+						<Button size="lg">Play</Button>
+					</Link>
+				</Form.Group>
+			</Form>
 		</div>
 	);
 });
